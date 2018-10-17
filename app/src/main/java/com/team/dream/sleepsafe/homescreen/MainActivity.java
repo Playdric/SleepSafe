@@ -1,9 +1,11 @@
-package com.team.dream.sleepsafe;
+package com.team.dream.sleepsafe.homescreen;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import com.team.dream.sleepsafe.R;
+
+public class MainActivity extends AppCompatActivity implements IMainActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
