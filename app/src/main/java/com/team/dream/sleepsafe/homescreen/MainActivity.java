@@ -1,6 +1,7 @@
 package com.team.dream.sleepsafe.homescreen;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.team.dream.sleepsafe.R;
+import com.team.dream.sleepsafe.hebergerdispo.HebergerDispoActivity;
 import com.team.dream.sleepsafe.hebergerreceived.HebergerReceivedActivity;
 import com.team.dream.sleepsafe.herbergerconnection.HebergerConnectionActivity;
 import com.team.dream.sleepsafe.utils.MyFirebaseMessagingService;
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
         mSiniterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, NewSinisterActivity.class));
+                startActivity(new Intent(MainActivity.this, HebergerDispoActivity.class));
             }
         });
 
