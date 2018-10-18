@@ -15,12 +15,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="cursive"
             android:gravity="center"
             android:textSize="30dp"
-            android:text="Renseignez vos coordonnées"
             android:layout_marginTop="30dp"
-            android:textColor="@color/accent"
-            />
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/primary"
+            android:text="Renseignez vos coordonnées" />
 
 
         <LinearLayout
@@ -35,7 +36,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Code Postal"
-                android:textSize="15dp"
+                android:theme="@style/MyEditText"
+                android:textSize="14dp"
                 android:textColor="@color/primary_dark"/>
 
             <EditText
@@ -44,7 +46,8 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:hint="Ville"
-                android:textSize="15dp"
+                android:theme="@style/MyEditText"
+                android:textSize="14dp"
                 android:textColor="@color/primary_dark"/>
 
         </LinearLayout>
@@ -54,7 +57,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Adresse"
-            android:textSize="15dp"
+            android:theme="@style/MyEditText"
+            android:textSize="14dp"
             android:textColor="@color/primary_dark"/>
 
         <android.support.v7.widget.AppCompatButton
@@ -62,6 +66,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:textSize="20dp"
             android:text="Utiliser ma géolocalisation"/>
 
@@ -74,7 +80,8 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:paddingTop="10dp"
+                android:textSize="14dp"
                 android:text="Place(s) disponible(s)"
                 android:textColor="@color/accent"
                 />
@@ -101,7 +108,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
-                android:text="Distance maximale"
+                android:text="Distance maximale (en m)"
                 android:textColor="@color/accent"
                 />
 
@@ -111,16 +118,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint=""
+                style="@style/MyEditText"
                 android:textSize="15dp"
                 android:textColor="@color/primary_dark"/>
-            <TextView
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="m"
-                android:textColor="@color/accent"
-                />
 
         </LinearLayout>
         <LinearLayout
@@ -134,6 +134,7 @@
                 android:id="@+id/chb_take_em"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="100dp"
                 android:checked="true" />
 
             <TextView
@@ -151,6 +152,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:textSize="20dp"
             android:text="Continuer"/>
 

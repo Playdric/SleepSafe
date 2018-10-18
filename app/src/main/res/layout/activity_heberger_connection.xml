@@ -13,9 +13,10 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="cursive"
             android:gravity="center"
             android:textSize="30dp"
-            android:text="Espace hebergeur"
+            android:text="Espace hébergeur"
             android:layout_marginTop="30dp"
             android:textColor="@color/accent"
             />
@@ -24,8 +25,9 @@
             android:id="@+id/edt_pseudo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
-            android:textSize="15dp"
+            android:hint="Pseudo"
+            android:theme="@style/MyEditText"
+            android:textSize="14dp"
             android:layout_margin="30dp"
             android:textColor="@color/primary_dark"/>
 
@@ -35,7 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Mot de passe"
-            android:textSize="15dp"
+            android:theme="@style/MyEditText"
+            android:textSize="14dp"
             android:layout_margin="30dp"
             android:textColor="@color/primary_dark"/>
 
@@ -50,6 +53,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
+                android:layout_marginRight="7dp"
                 android:textSize="20dp"
                 android:text="Inscription"/>
 
@@ -58,6 +62,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
+                android:layout_marginLeft="7dp"
                 android:textSize="20dp"
                 android:text="Connexion"/>
 

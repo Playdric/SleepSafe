@@ -14,17 +14,21 @@
             android:id="@+id/title_heberger"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="cursive"
             android:gravity="center"
             android:textSize="30dp"
-            android:text="Tersou ce fdp peut vous héberger !"
             android:layout_marginTop="30dp"
-            android:textColor="@color/accent"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/primary"
+            android:text="Etes vous disponible ?"
+
             />
 
         <LinearLayout
-            android:layout_margin="30dp"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -37,8 +41,10 @@
                 android:id="@+id/adress_heberger"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="0.5"
                 android:layout_margin="30dp"
-                android:text="420 allée des guédro"
                 android:textSize="20dp"
                 android:textColor="@color/accent"
                 android:onClick="openMaps"
@@ -55,6 +61,9 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="40dp"
                 android:src="@drawable/phone"
                 />
 

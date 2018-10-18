@@ -16,35 +16,40 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:fontFamily="cursive"
             android:gravity="center"
+            android:textSize="30dp"
+            android:layout_marginTop="30dp"
             android:text="Sinistrés à moins de xx mètres de chez vous"
             android:textColor="@color/accent"
             />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="14dp"
                 android:text="Il vous reste "
                 android:textColor="@color/accent"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
+                android:textSize="16dp"
+                android:textStyle="bold"
                 android:text="xx"
                 android:textColor="@color/accent"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text=" place(s) dispos"
+                android:textSize="14dp"
+                android:text=" place(s) disponible(s)"
                 android:textColor="@color/accent"
                 />
 

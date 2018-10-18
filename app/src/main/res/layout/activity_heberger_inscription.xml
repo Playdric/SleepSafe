@@ -14,11 +14,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="cursive"
             android:gravity="center"
             android:textSize="30dp"
-            android:text="Renseignez vos coordonnées"
             android:layout_marginTop="30dp"
-            android:textColor="@color/accent"
+            android:textColor="@color/primary"
+            android:text="Renseignez vos coordonnées"
+
+
             />
 
         <EditText
@@ -27,15 +30,18 @@
             android:layout_height="wrap_content"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:textSize="15dp"
+            style="@style/MyEditText"
+            android:textSize="14dp"
             android:textColor="@color/primary_dark"/>
 
         <EditText
             android:id="@+id/edt_firstname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nom"
-            android:textSize="15dp"
+            android:hint="Pseudo"
+            android:theme="@style/MyEditText"
+            android:textSize="14dp"
+            android:layout_margin="30dp"
             android:textColor="@color/primary_dark"/>
 
         <EditText
@@ -43,7 +49,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Prénom"
-            android:textSize="15dp"
+            android:textSize="14dp"
+            style="@style/MyEditText"
+            android:layout_margin="30dp"
             android:textColor="@color/primary_dark"/>
 
         <EditText
@@ -51,7 +59,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Téléphone"
-            android:textSize="15dp"
+            android:textSize="14dp"
+            style="@style/MyEditText"
             android:inputType="phone"
             android:textColor="@color/primary_dark"/>
 
@@ -61,7 +70,9 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:hint="Mot de passe"
-            android:textSize="15dp"
+            android:theme="@style/MyEditText"
+            android:textSize="14dp"
+            android:layout_margin="30dp"
             android:textColor="@color/primary_dark"/>
 
         <EditText
@@ -70,7 +81,9 @@
             android:inputType="textPassword"
             android:layout_height="wrap_content"
             android:hint="Confirmation"
-            android:textSize="15dp"
+            android:theme="@style/MyEditText"
+            android:textSize="14dp"
+            android:layout_margin="30dp"
             android:textColor="@color/primary_dark"/>
 
         <android.support.v7.widget.AppCompatButton

@@ -7,6 +7,7 @@
     tools:context=".newsinister.NewSinisterActivity">
 
     <LinearLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -14,11 +15,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="cursive"
             android:gravity="center"
             android:textSize="30dp"
-            android:text="Renseignez votre situation :"
+            android:text="Renseignez votre situation"
             android:layout_marginTop="30dp"
-            android:textColor="@color/accent"
+            android:textColor="@color/primary"
             />
 
         <EditText
@@ -26,6 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
+            style="@style/MyEditText"
             android:hint="Nombre de personnes ?"
             android:scrollbars="vertical"
             android:inputType="number"
@@ -36,6 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
+            style="@style/MyEditText"
             android:hint="Un détail ?.."
             android:maxLines="10"
             android:scrollbars="vertical"
@@ -47,6 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="60dp"
             android:textSize="20dp"
             android:text="Je suis en galère"/>
 
