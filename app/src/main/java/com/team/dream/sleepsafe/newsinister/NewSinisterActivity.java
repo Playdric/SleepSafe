@@ -36,7 +36,6 @@ import java.util.List;
 
 public class NewSinisterActivity extends AppCompatActivity implements INewSinisterActivity {
 
-    Spinner spinner;
     Button mValidatebtn;
     EditText comm;
     SharedPreferences sharedPreferences;
@@ -61,9 +60,7 @@ public class NewSinisterActivity extends AppCompatActivity implements INewSinist
         mValidatebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (verifySinisterInformation()) {
-                    Toast.makeText(NewSinisterActivity.this, "Localisation pas trouvée, déso", Toast.LENGTH_SHORT).show();
-                }
+                Toast.makeText(NewSinisterActivity.this, "Localisation pas trouvée, déso", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -111,15 +108,6 @@ public class NewSinisterActivity extends AppCompatActivity implements INewSinist
         }
     }
 
-    private Boolean verifySinisterInformation() {
-        if (spinner.getSelectedItemPosition() == -1) {
-            Toast.makeText(this, "Renseignez le nombre de sinistrés", Toast.LENGTH_SHORT).show();
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     private void getLoc() {
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -129,31 +117,21 @@ public class NewSinisterActivity extends AppCompatActivity implements INewSinist
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.ACCESS_FINE_LOCATION)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-                new AlertDialog.Builder(this)
-                        .setTitle("On a besoin de te localisation")
-                        .setMessage("Sinon on pourra pas valider que t'es en galère")
-                        .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                //Prompt the user once explanation has been shown
-                                ActivityCompat.requestPermissions(NewSinisterActivity.this,
-                                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                        3);
-                            }
-                        })
-                        .create()
-                        .show();
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        3);
-            }
+
+            new AlertDialog.Builder(this)
+                    .setTitle("On a besoin de te localisation")
+                    .setMessage("Sinon on pourra pas valider que t'es en galère")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //Prompt the user once explanation has been shown
+                            ActivityCompat.requestPermissions(NewSinisterActivity.this,
+                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                                    3);
+                        }
+                    })
+                    .create()
+                    .show();
         } else {
             getLocation();
         }
@@ -188,13 +166,11 @@ public class NewSinisterActivity extends AppCompatActivity implements INewSinist
         mValidatebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (verifySinisterInformation()) {
-                    presenter.sendSinister(
-                            spinner.getSelectedItemPosition(),
-                            comm.getText().toString(),
-                            loc,
-                            getIdPhone());
-                }
+                presenter.sendSinister(
+                        Integer.valueOf(edtNbPeople.getText().toString()),
+                        comm.getText().toString(),
+                        loc,
+                        getIdPhone());
             }
         });
 
