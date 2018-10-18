@@ -21,6 +21,7 @@
             />
 
         <EditText
+            android:id="@+id/edt_pseudo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Pseudo"
@@ -29,6 +30,7 @@
             android:textColor="@color/primary_dark"/>
 
         <EditText
+            android:id="@+id/edt_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Mot de passe"
@@ -37,6 +39,7 @@
             android:textColor="@color/primary_dark"/>
 
         <EditText
+            android:id="@+id/edt_password_confirmation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Confirmation"

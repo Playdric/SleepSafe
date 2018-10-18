@@ -23,6 +23,7 @@
             />
 
         <EditText
+            android:id="@+id/edt_pseudo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Pseudo"
@@ -36,13 +37,17 @@
             >
 
             <EditText
+                android:id="@+id/edt_zip_code"
                 android:layout_weight="1"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:hint="Code Postal"
                 android:textSize="15dp"
                 android:textColor="@color/primary_dark"/>
 
             <EditText
+                android:id="@+id/edt_city"
+                android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:hint="Ville"
@@ -60,17 +65,20 @@
             android:text="Utiliser ma géolocalisation"/>
 
         <EditText
+            android:id="@+id/edt_mail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
             android:textSize="15dp"
-
+            android:inputType="textEmailAddress"
             android:textColor="@color/primary_dark"/>
 
         <EditText
+            android:id="@+id/edtphone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Téléphone"
+            android:inputType="phone"
             android:textSize="15dp"
             android:textColor="@color/primary_dark"/>
 
@@ -110,6 +118,7 @@
                 />
 
             <EditText
+                android:id="@+id/edt_max_distance"
                 android:layout_weight="2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -134,7 +143,7 @@
 
 
             <CheckBox
-                android:id="@+id/chkAndroid"
+                android:id="@+id/chb_take_em"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true" />
