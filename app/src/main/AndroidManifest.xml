@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:name=".BaseApplication"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".homescreen.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -18,6 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".hebergerreceived.HebergerReceivedActivity" />
+        <activity android:name=".herbergerconnection.HebergerConnectionActivity" />
+        <activity android:name=".hebergerinscription.HebergerInscriptionActivity" />
+        <activity android:name=".hebergerinformation.HebergerInformationActivity" />
+        <activity android:name=".hebergerdispo.HebergerDispoActivity" />
+        <activity android:name=".hebergeraccept.HebergerAcceptActivity"></activity>
     </application>
 
 </manifest>
