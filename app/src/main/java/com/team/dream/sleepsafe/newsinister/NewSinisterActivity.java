@@ -17,6 +17,9 @@ import com.androidnetworking.error.ANError;
 import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.homescreen.MainActivity;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +37,6 @@ public class NewSinisterActivity extends AppCompatActivity implements INewSinist
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_sinister);
-        AndroidNetworking.initialize(getApplicationContext());
-
 
         initView();
         initListener();
@@ -49,7 +50,9 @@ public class NewSinisterActivity extends AppCompatActivity implements INewSinist
                     presenter.sendSinister(
                             pseudo.getText().toString(),
                             spinner.getSelectedItemPosition(),
-                            comm.getText().toString());
+                            comm.getText().toString(),
+                            "loca",
+                            "id_phone");
                 }
             }
         });
@@ -85,6 +88,25 @@ public class NewSinisterActivity extends AppCompatActivity implements INewSinist
                     }
                 });
         alertDialog.show();
+    }
+
+    @Override
+    public void sendOK(JSONObject response) {
+        try {
+            AlertDialog alertDialog = new AlertDialog.Builder(NewSinisterActivity.this).create();
+            alertDialog.setTitle("Alert");
+            alertDialog.setMessage("Nous avons pris en compte votre demande à l'adresse : "
+                    + response.getString("localisation") + " Vous pouvez quitter l'application");
+            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            alertDialog.show();
+        } catch (JSONException e) {
+
+        }
     }
 
     private Boolean verifySinisterInformation(){

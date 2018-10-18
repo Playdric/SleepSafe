@@ -1,9 +1,11 @@
 package com.team.dream.sleepsafe.newsinister;
 import android.content.Context;
+import android.util.Log;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.team.dream.sleepsafe.BaseApplication;
 
 import org.json.JSONArray;
@@ -23,25 +25,31 @@ public class NewSinisterActivityPresenter implements INewSinisterActivityPresent
 
 
     @Override
-    public void sendSinister(String pseudo, int nb, String comm) {
+    public void sendSinister(String pseudo, int nb, String comm, String localisation, String id_phone) {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("pseudo", pseudo);
-            jsonObject.put("nb", nb);
-            jsonObject.put("comm", comm);
+            jsonObject.put("nb_people", nb);
+            jsonObject.put("comment", comm);
+            jsonObject.put("localisation", localisation);
+            jsonObject.put("id_phone", id_phone);
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        AndroidNetworking.post(BaseApplication.URL)
+        Log.d("test",BaseApplication.URL + "/sinister");
+        AndroidNetworking.post(BaseApplication.URL + "/sinister")
                 .addJSONObjectBody(jsonObject)
                 .build()
-                .getAsJSONArray(new JSONArrayRequestListener() {
+                .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
+                        view.sendOK(response);
                     }
+
                     @Override
-                    public void onError(ANError error) {
-                        view.sendError(error);
+                    public void onError(ANError anError) {
+                        view.sendError(anError);
                     }
                 });
     }
