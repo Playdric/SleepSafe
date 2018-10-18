@@ -15,9 +15,12 @@ public class HebergerInscriptionActivity extends AppCompatActivity implements IH
 
     private HebergerInscriptionActivityPresenter presenter;
     private Button btnConection;
-    private EditText edtPseudo;
+    private EditText edtEmail;
     private EditText edtPassword;
     private EditText edtPasswordConfirmation;
+    private EditText edtFirstname;
+    private EditText edtLastname;
+    private EditText edtPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +39,10 @@ public class HebergerInscriptionActivity extends AppCompatActivity implements IH
             @Override
             public void onClick(View v) {
                 presenter.registration(
-                        edtPseudo.getText().toString(),
+                        edtEmail.getText().toString(),
+                        edtFirstname.getText().toString(),
+                        edtLastname.getText().toString(),
+                        edtPhone.getText().toString(),
                         edtPassword.getText().toString(),
                         edtPasswordConfirmation.getText().toString());
             }
@@ -46,9 +52,12 @@ public class HebergerInscriptionActivity extends AppCompatActivity implements IH
 
     private void initView() {
         this.btnConection = findViewById(R.id.btn_inscription);
-        this.edtPseudo = findViewById(R.id.edt_pseudo);
+        this.edtEmail = findViewById(R.id.edt_email);
         this.edtPassword = findViewById(R.id.edt_password);
         this.edtPasswordConfirmation = findViewById(R.id.edt_password_confirmation);
+        this.edtPhone = findViewById(R.id.edt_phone_number);
+        this.edtFirstname = findViewById(R.id.edt_firstname);
+        this.edtLastname = findViewById(R.id.edt_lastname);
     }
 
     @Override

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.team.dream.sleepsafe.BaseApplication;
 import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.hebergerreceived.HebergerReceivedActivity;
 import com.team.dream.sleepsafe.herbergerconnection.HebergerConnectionActivity;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
         initView();
         initListener();
 
-
+        Log.d("bite", BaseApplication.BASE_URL + "/user/");
     }
 
     private void initListener() {

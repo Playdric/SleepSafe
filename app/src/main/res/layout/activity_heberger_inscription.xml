@@ -8,6 +8,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingHorizontal="20dp"
         android:orientation="vertical">
 
         <TextView
@@ -21,30 +22,55 @@
             />
 
         <EditText
-            android:id="@+id/edt_pseudo"
+            android:id="@+id/edt_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Pseudo"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
             android:textSize="15dp"
-            android:layout_margin="30dp"
+            android:textColor="@color/primary_dark"/>
+
+        <EditText
+            android:id="@+id/edt_firstname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nom"
+            android:textSize="15dp"
+            android:textColor="@color/primary_dark"/>
+
+        <EditText
+            android:id="@+id/edt_lastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Prénom"
+            android:textSize="15dp"
+            android:textColor="@color/primary_dark"/>
+
+        <EditText
+            android:id="@+id/edt_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Téléphone"
+            android:textSize="15dp"
+            android:inputType="phone"
             android:textColor="@color/primary_dark"/>
 
         <EditText
             android:id="@+id/edt_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textPassword"
             android:hint="Mot de passe"
             android:textSize="15dp"
-            android:layout_margin="30dp"
             android:textColor="@color/primary_dark"/>
 
         <EditText
             android:id="@+id/edt_password_confirmation"
             android:layout_width="match_parent"
+            android:inputType="textPassword"
             android:layout_height="wrap_content"
             android:hint="Confirmation"
             android:textSize="15dp"
-            android:layout_margin="30dp"
             android:textColor="@color/primary_dark"/>
 
             <android.support.v7.widget.AppCompatButton

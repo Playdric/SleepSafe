@@ -24,7 +24,7 @@
             android:id="@+id/edt_pseudo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Pseudo"
+            android:hint="Email"
             android:textSize="15dp"
             android:layout_margin="30dp"
             android:textColor="@color/primary_dark"/>
