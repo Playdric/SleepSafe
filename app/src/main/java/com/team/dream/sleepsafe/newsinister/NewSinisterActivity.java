@@ -70,19 +70,10 @@ public class NewSinisterActivity extends AppCompatActivity implements INewSinist
 
     private void initView() {
         mValidatebtn = findViewById(R.id.btn_validate_sinister);
-        spinner = findViewById(R.id.spinner_nb_people);
         comm = findViewById(R.id.new_sinister_comm);
         presenter = new NewSinisterActivityPresenter(this, this);
         edtNbPeople = findViewById(R.id.tdt_nb_people);
 
-        List spinnerList = new ArrayList();
-        for (int i = 0; i < 10; i++) {
-            spinnerList.add(Integer.toString(i));
-        }
-
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, spinnerList);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
     }
 
 

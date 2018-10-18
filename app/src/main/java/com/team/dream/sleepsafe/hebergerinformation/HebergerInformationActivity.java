@@ -199,27 +199,28 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
                     edtMaxDistance.setText("0");
                     jsonObject.put("distance", "0");
                 }
-                jsonObject.put("adress_name", edtRoad.getText().toString());
-                jsonObject.put("adress_zipcode", edtSipCode.getText().toString());
-                jsonObject.put("adress_city", edtCity.getText().toString());
+                jsonObject.put("address_name", edtRoad.getText().toString());
+                jsonObject.put("address_zipcode", edtSipCode.getText().toString());
+                jsonObject.put("address_city", edtCity.getText().toString());
                 jsonObject.put("nb_bed", edtPlaces.getText().toString());
                 jsonObject.put("id_user", "1");
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            System.out.println(jsonObject.toString());
             AndroidNetworking.post(BaseApplication.BASE_URL + "/host")
                     .addJSONObjectBody(jsonObject)
                     .build()
                     .getAsJSONObject(new JSONObjectRequestListener() {
                         @Override
                         public void onResponse(JSONObject response) {
-
+                            System.out.print("ca marche");
                         }
 
                         @Override
                         public void onError(ANError anError) {
-
+                            System.out.print(anError);
                         }
                     });
         }
