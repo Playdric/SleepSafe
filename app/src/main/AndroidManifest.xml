@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.team.dream.sleepsafe">
-
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,6 +24,7 @@
         <activity android:name=".hebergerinformation.HebergerInformationActivity" />
         <activity android:name=".hebergerdispo.HebergerDispoActivity" />
         <activity android:name=".hebergeraccept.HebergerAcceptActivity"></activity>
+        <activity android:name=".newsinister.NewSinisterActivity"></activity>
     </application>
 
 </manifest>
