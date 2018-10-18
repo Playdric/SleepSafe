@@ -1,6 +1,7 @@
 package com.team.dream.sleepsafe.homescreen;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.team.dream.sleepsafe.R;
+import com.team.dream.sleepsafe.hebergerdispo.HebergerDispoActivity;
+import com.team.dream.sleepsafe.hebergerinformation.HebergerInformationActivity;
 import com.team.dream.sleepsafe.hebergeraccept.HebergerAcceptActivity;
 import com.team.dream.sleepsafe.hebergerreceived.HebergerReceivedActivity;
 import com.team.dream.sleepsafe.herbergerconnection.HebergerConnectionActivity;

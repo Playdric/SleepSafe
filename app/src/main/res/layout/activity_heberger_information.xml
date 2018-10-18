@@ -22,13 +22,6 @@
             android:textColor="@color/accent"
             />
 
-        <EditText
-            android:id="@+id/edt_pseudo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Pseudo"
-            android:textSize="15dp"
-            android:textColor="@color/primary_dark"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,6 +49,14 @@
 
         </LinearLayout>
 
+        <EditText
+            android:id="@+id/edt_road"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Adresse"
+            android:textSize="15dp"
+            android:textColor="@color/primary_dark"/>
+
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_i_live_here"
             android:layout_width="wrap_content"
@@ -64,23 +65,6 @@
             android:textSize="20dp"
             android:text="Utiliser ma géolocalisation"/>
 
-        <EditText
-            android:id="@+id/edt_mail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email"
-            android:textSize="15dp"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/primary_dark"/>
-
-        <EditText
-            android:id="@+id/edtphone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Téléphone"
-            android:inputType="phone"
-            android:textSize="15dp"
-            android:textColor="@color/primary_dark"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -95,11 +79,15 @@
                 android:textColor="@color/accent"
                 />
 
-            <Spinner
-                android:id="@+id/spinner_nb_dispo"
-                android:layout_width="match_parent"
+            <EditText
+                android:id="@+id/edt_places_dispo"
+                android:layout_weight="2"
+                android:layout_width="0dp"
+                android:inputType="number"
                 android:layout_height="wrap_content"
-                />
+                android:hint=""
+                android:textSize="15dp"
+                android:textColor="@color/primary_dark"/>
 
         </LinearLayout>
 
@@ -159,7 +147,7 @@
         </LinearLayout>
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_connexion"
+            android:id="@+id/btn_continue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

@@ -17,6 +17,8 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
         SharedPreferences sharedPref = getApplicationContext().getSharedPreferences("pref", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("FCM_ID", token);
+        Log.d("FCM_ID", token);
+        System.out.println(token);
         editor.apply();
         // If you want to send messages to this application instance or
         // manage this apps subscriptions on the server side, send the
