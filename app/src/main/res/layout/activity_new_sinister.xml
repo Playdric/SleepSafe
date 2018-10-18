@@ -22,6 +22,7 @@
             />
 
         <EditText
+            android:id="@+id/new_sinister_pseudo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Pseudo"
@@ -52,7 +53,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/comm"
+            android:id="@+id/new_sinister_comm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="30dp"
