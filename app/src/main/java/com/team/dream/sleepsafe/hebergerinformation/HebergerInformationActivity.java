@@ -22,11 +22,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.team.dream.sleepsafe.BaseApplication;
 import com.team.dream.sleepsafe.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
@@ -34,13 +42,11 @@ import java.util.Locale;
 
 public class HebergerInformationActivity extends AppCompatActivity implements IHebergerInformationActivity {
 
-    private EditText edtPseudo;
     private EditText edtSipCode;
     private EditText edtCity;
     private EditText edtRoad;
-    private EditText edtMail;
-    private EditText edtPhone;
     private EditText edtMaxDistance;
+    private EditText edtPlaces;
     private Button btnGeoloc;
     private Button btnValidate;
     private CheckBox chbTakeEm;
@@ -63,6 +69,10 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
         edtCity = findViewById(R.id.edt_city);
         edtRoad = findViewById(R.id.edt_road);
         btnGeoloc = findViewById(R.id.btn_i_live_here);
+        btnValidate = findViewById(R.id.btn_continue);
+        edtPlaces = findViewById(R.id.edt_places_dispo);
+        edtMaxDistance = findViewById(R.id.edt_max_distance);
+        chbTakeEm = findViewById(R.id.chb_take_em);
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         provider = locationManager.getBestProvider(new Criteria(), false);
@@ -74,18 +84,21 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
                 getLoc();
             }
         });
+
+        btnValidate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendHost();
+            }
+        });
     }
 
     public void getLoc() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            // Should we show an explanation?
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
                 new AlertDialog.Builder(this)
                         .setTitle("coucou")
                         .setMessage("ttt")
@@ -147,6 +160,69 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
                         }
                     }
                 });
+    }
+
+    private Boolean verifySinisterInformation() {
+        if (edtCity.getText().toString().equalsIgnoreCase("")) {
+            Toast.makeText(this, "Renseignez la ville", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if(edtMaxDistance.getText().toString().equalsIgnoreCase("")) {
+            Toast.makeText(this, "Renseignez la distance maximale de prise en charge", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if(edtRoad.getText().toString().equalsIgnoreCase("")) {
+            Toast.makeText(this, "Renseignez la rue", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if(edtSipCode.getText().toString().equalsIgnoreCase("")) {
+            Toast.makeText(this, "Renseignez un code postal", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if(edtPlaces.getText().toString().equalsIgnoreCase("")) {
+            Toast.makeText(this, "Renseignez le nombre de places disponibles", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else  {
+            return true;
+        }
+    }
+
+    private void sendHost() {
+        if(verifySinisterInformation()){
+            JSONObject jsonObject = new JSONObject();
+            try {
+                if (chbTakeEm.isChecked()){
+                    jsonObject.put("distance", edtMaxDistance.getText().toString());
+                }
+                else {
+                    edtMaxDistance.setText("0");
+                    jsonObject.put("distance", "0");
+                }
+                jsonObject.put("adress_name", edtRoad.getText().toString());
+                jsonObject.put("adress_zipcode", edtSipCode.getText().toString());
+                jsonObject.put("adress_city", edtCity.getText().toString());
+                jsonObject.put("nb_bed", edtPlaces.getText().toString());
+                jsonObject.put("id_user", "1");
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            AndroidNetworking.post(BaseApplication.BASE_URL + "/host")
+                    .addJSONObjectBody(jsonObject)
+                    .build()
+                    .getAsJSONObject(new JSONObjectRequestListener() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+
+                        }
+
+                        @Override
+                        public void onError(ANError anError) {
+
+                        }
+                    });
+        }
     }
 }
 
