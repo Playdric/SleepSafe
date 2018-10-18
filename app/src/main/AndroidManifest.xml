@@ -28,7 +28,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".hebergerdispo.HebergerDispoActivity" />
-        <activity android:name=".hebergeraccept.HebergerAcceptActivity"></activity>
+        <activity android:name=".hebergeraccept.HebergerAcceptActivity">
+            <intent-filter>
+                <action android:name="kdshvlshl" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
 
         <service android:name=".MyFireBaseMessagingService"
             android:stopWithTask="false">
