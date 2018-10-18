@@ -25,10 +25,9 @@ public class NewSinisterActivityPresenter implements INewSinisterActivityPresent
 
 
     @Override
-    public void sendSinister(String pseudo, int nb, String comm, String localisation, String id_phone) {
+    public void sendSinister( int nb, String comm, String localisation, String id_phone) {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("pseudo", pseudo);
             jsonObject.put("nb_people", nb);
             jsonObject.put("comment", comm);
             jsonObject.put("localisation", localisation);
