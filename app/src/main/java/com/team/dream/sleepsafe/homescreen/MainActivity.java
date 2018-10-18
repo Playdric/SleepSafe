@@ -8,18 +8,25 @@ import android.widget.Button;
 
 import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.hebergerreceived.HebergerReceivedActivity;
+import com.team.dream.sleepsafe.herbergerconnection.HebergerConnectionActivity;
 
 public class MainActivity extends AppCompatActivity implements IMainActivity{
 
     Button mSiniterButton;
+    Button btnHeberger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mSiniterButton = findViewById(R.id.btn_stricken);
+        initView();
+        initListener();
 
+
+    }
+
+    private void initListener() {
         mSiniterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -27,5 +34,17 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
                 startActivity(intent);
             }
         });
+
+        btnHeberger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, HebergerConnectionActivity.class));
+            }
+        });
+    }
+
+    private void initView() {
+        mSiniterButton = findViewById(R.id.btn_stricken);
+        btnHeberger = findViewById(R.id.btn_host);
     }
 }
