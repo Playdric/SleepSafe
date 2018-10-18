@@ -2,6 +2,7 @@ package com.team.dream.sleepsafe.hebergerdispo;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ public class HebergerDispoActivity extends AppCompatActivity implements IHeberge
     TextView hostAdress;
     TextView hostPhone;
     Button acceptBtn;
+    SharedPreferences sharedPreferences;
     HebergerDispoActivityPresenter presenter;
 
 
@@ -35,12 +37,14 @@ public class HebergerDispoActivity extends AppCompatActivity implements IHeberge
 
         initView();
         initListener();
+        getContact();
     }
 
     private void initListener() {
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saveContact();
                 presenter.acceptHost("id_host","id_phone");
             }
         });
@@ -88,6 +92,7 @@ public class HebergerDispoActivity extends AppCompatActivity implements IHeberge
         builder.setMessage("Oui pour être rediriger sur Maps Non pour rester sur les coordonnées");
         builder.setPositiveButton("OUI", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+                saveContact();
                 Uri gmmIntentUri = Uri.parse("geo:0,0?q= " + hostAdress.getText().toString());
                 Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
                 mapIntent.setPackage("com.google.android.apps.maps");
@@ -111,6 +116,7 @@ public class HebergerDispoActivity extends AppCompatActivity implements IHeberge
         builder.setMessage("Oui pour appeler");
         builder.setPositiveButton("OUI", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
+                saveContact();
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", hostPhone.getText().toString(), null));
                 startActivity(intent);
             }
@@ -124,5 +130,25 @@ public class HebergerDispoActivity extends AppCompatActivity implements IHeberge
 
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    public void saveContact() {
+        sharedPreferences
+                .edit()
+                .putString("phone", hostPhone.getText().toString())
+                .putString("adress",hostAdress.getText().toString())
+                .apply();
+    }
+
+    public void getContact() {
+        /*if il y a des données de notif push
+        hostPhone.setText(phone);
+        hostAdress.setText(adresse);
+        hostName.setText(name + "peut vous héberger !");
+        else {
+            hostPhone.setText(sharedPreferences.getString("phone","0600000000"));
+            hostAdress.setText(sharedPreferences.getString("adress",""));
+            hostName.setText("On peut vous héberger !");
+        }*/
     }
 }
