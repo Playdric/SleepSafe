@@ -101,11 +101,12 @@ public class NewSinisterActivity extends AppCompatActivity implements INewSinist
                     new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
+                            NewSinisterActivity.this.finish();
                         }
                     });
             alertDialog.show();
         } catch (JSONException e) {
-
+            Log.d("JSON error", e.toString());
         }
     }
 
