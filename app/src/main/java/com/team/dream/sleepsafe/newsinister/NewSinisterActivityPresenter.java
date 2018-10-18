@@ -36,7 +36,6 @@ public class NewSinisterActivityPresenter implements INewSinisterActivityPresent
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.d("test",BaseApplication.BASE_URL + "/sinister");
         AndroidNetworking.post(BaseApplication.BASE_URL + "/sinister")
                 .addJSONObjectBody(jsonObject)
                 .build()

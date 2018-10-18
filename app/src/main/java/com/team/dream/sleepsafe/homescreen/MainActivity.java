@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.hebergerdispo.HebergerDispoActivity;
+import com.team.dream.sleepsafe.hebergerinformation.HebergerInformationActivity;
 import com.team.dream.sleepsafe.hebergeraccept.HebergerAcceptActivity;
 import com.team.dream.sleepsafe.hebergerreceived.HebergerReceivedActivity;
 import com.team.dream.sleepsafe.herbergerconnection.HebergerConnectionActivity;
