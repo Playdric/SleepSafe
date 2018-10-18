@@ -25,10 +25,9 @@ public class NewSinisterActivityPresenter implements INewSinisterActivityPresent
 
 
     @Override
-    public void sendSinister(String pseudo, int nb, String comm, String localisation, String id_phone) {
+    public void sendSinister( int nb, String comm, String localisation, String id_phone) {
         JSONObject jsonObject = new JSONObject();
         try {
-            jsonObject.put("pseudo", pseudo);
             jsonObject.put("nb_people", nb);
             jsonObject.put("comment", comm);
             jsonObject.put("localisation", localisation);
@@ -37,8 +36,8 @@ public class NewSinisterActivityPresenter implements INewSinisterActivityPresent
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.d("test",BaseApplication.URL + "/sinister");
-        AndroidNetworking.post(BaseApplication.URL + "/sinister")
+        Log.d("test",BaseApplication.BASE_URL + "/sinister");
+        AndroidNetworking.post(BaseApplication.BASE_URL + "/sinister")
                 .addJSONObjectBody(jsonObject)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
