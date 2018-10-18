@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".newsinister.NewSinisterActivity">
-
+    tools:context=".herbergerconnection.HebergerConnectionActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -16,7 +15,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="30dp"
-            android:text="Renseignez votre situation :"
+            android:text="Espace hebergeur"
             android:layout_marginTop="30dp"
             android:textColor="@color/accent"
             />
@@ -29,47 +28,39 @@
             android:layout_margin="30dp"
             android:textColor="@color/primary_dark"/>
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mot de passe"
+            android:textSize="15dp"
+            android:layout_margin="30dp"
+            android:textColor="@color/primary_dark"/>
+
         <LinearLayout
             android:layout_margin="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_inscription"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="25dp"
-                android:text="Combien êtes vous ?"
-                android:textColor="@color/accent"
-                />
+                android:layout_weight="0.5"
+                android:textSize="20dp"
+                android:text="Inscription"/>
 
-            <Spinner
-                android:id="@+id/spinner_nb_people"
-                android:layout_width="match_parent"
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_connexion"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                />
+                android:layout_weight="0.5"
+                android:textSize="20dp"
+                android:text="Connexion"/>
 
         </LinearLayout>
 
-        <EditText
-            android:id="@+id/comm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:hint="Un détail ?.."
-            android:maxLines="10"
-            android:scrollbars="vertical"
-            android:inputType="textMultiLine"
-            />
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_validate_sinister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="20dp"
-            android:text="Je suis en galère"/>
 
     </LinearLayout>
-
 </android.support.constraint.ConstraintLayout>

@@ -18,7 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".hebergerreceived.HebergerReceivedActivity"></activity>
+        <activity android:name=".hebergerreceived.HebergerReceivedActivity" />
+        <activity android:name=".herbergerconnection.HebergerConnectionActivity" />
+        <activity android:name=".hebergerinscription.HebergerInscriptionActivity" />
+        <activity android:name=".hebergerinformation.HebergerInformationActivity" />
+        <activity android:name=".hebergerdispo.HebergerDispoActivity" />
+        <activity android:name=".hebergeraccept.HebergerAcceptActivity"></activity>
     </application>
 
 </manifest>
