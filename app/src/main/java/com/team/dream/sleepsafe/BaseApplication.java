@@ -6,7 +6,7 @@ import com.androidnetworking.AndroidNetworking;
 
 public class BaseApplication extends Application {
 
-    public static String URL = "http://10.33.1.117:3000";
+    public static String BASE_URL = "http://10.33.1.117:3000";
 
     @Override
     public void onCreate() {
