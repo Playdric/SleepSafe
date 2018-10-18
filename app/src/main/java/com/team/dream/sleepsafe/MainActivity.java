@@ -4,12 +4,14 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -112,6 +114,9 @@ public class MainActivity extends AppCompatActivity {
                                 String postalCode = addresses.get(0).getPostalCode();
                                 String knownName = addresses.get(0).getFeatureName();
                                 Log.d("ladresse", address);
+                                String uri = "http://maps.google.co.in/maps?q=" + address;
+                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                                getApplicationContext().startActivity(intent);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
