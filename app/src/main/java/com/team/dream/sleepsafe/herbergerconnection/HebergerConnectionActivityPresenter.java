@@ -1,7 +1,10 @@
 package com.team.dream.sleepsafe.herbergerconnection;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
@@ -9,6 +12,7 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.team.dream.sleepsafe.BaseApplication;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class HebergerConnectionActivityPresenter implements IHebergerConnectionActivityPresenter {
@@ -31,10 +35,19 @@ public class HebergerConnectionActivityPresenter implements IHebergerConnectionA
             return;
         }
 
-        AndroidNetworking.post(BaseApplication.BASE_URL)
-                .addBodyParameter("firstname", "Amit")
-                .addBodyParameter("lastname", "Shekhar")
-                .setTag("test")
+        JSONObject user = new JSONObject();
+        try {
+            user.accumulate("email", pseudo);
+            user.accumulate("password", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        Log.d("bite", user.toString());
+
+
+        AndroidNetworking.post(BaseApplication.BASE_URL+ "/")
+                .addJSONObjectBody(user)
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {
@@ -47,7 +60,5 @@ public class HebergerConnectionActivityPresenter implements IHebergerConnectionA
                         view.errorFields(error.getErrorBody());
                     }
                 });
-
-        view.launchHebergerInfo();
     }
 }

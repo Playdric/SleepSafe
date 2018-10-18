@@ -16,7 +16,7 @@ public class HebergerConnectionActivity extends AppCompatActivity implements IHe
 
     private Button btnConnection;
     private Button btnSignIn;
-    private EditText edtPseudo;
+    private EditText edtEmail;
     private EditText edtPassword;
 
     private HebergerConnectionActivityPresenter presenter;
@@ -33,7 +33,7 @@ public class HebergerConnectionActivity extends AppCompatActivity implements IHe
     private void initView() {
         btnConnection = findViewById(R.id.btn_connexion);
         btnSignIn = findViewById(R.id.btn_inscription);
-        edtPseudo = findViewById(R.id.edt_pseudo);
+        edtEmail = findViewById(R.id.edt_pseudo);
         edtPassword = findViewById(R.id.edt_password);
     }
 
@@ -41,7 +41,7 @@ public class HebergerConnectionActivity extends AppCompatActivity implements IHe
         btnConnection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.connection(edtPseudo.getText().toString(), edtPassword.getText().toString());
+                presenter.connection(edtEmail.getText().toString(), edtPassword.getText().toString());
             }
         });
 
