@@ -44,6 +44,16 @@
         </LinearLayout>
 
         <EditText
+            android:id="@+id/tdt_nb_people"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:hint="Nombre de personnes ?"
+            android:scrollbars="vertical"
+            android:inputType="number"
+            />
+
+        <EditText
             android:id="@+id/new_sinister_comm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
