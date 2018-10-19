@@ -50,7 +50,8 @@ public class HebergerDispoActivity extends AppCompatActivity implements IHeberge
         acceptBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.acceptHost("id_host","id_phone");
+                //presenter.acceptHost("id_host","id_phone");
+                openCall();
             }
         });
     }
@@ -118,7 +119,8 @@ public class HebergerDispoActivity extends AppCompatActivity implements IHeberge
         alert.show();
     }
 
-    public void openCall(View v) {
+    @Override
+    public void openCall() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Oui pour appeler");
         builder.setPositiveButton("OUI", new DialogInterface.OnClickListener() {

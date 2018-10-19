@@ -13,6 +13,7 @@ import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.hebergerdispo.HebergerDispoActivity;
 import com.team.dream.sleepsafe.hebergerinformation.HebergerInformationActivity;
 import com.team.dream.sleepsafe.hebergeraccept.HebergerAcceptActivity;
+import com.team.dream.sleepsafe.hebergerinscription.HebergerInscriptionActivity;
 import com.team.dream.sleepsafe.hebergerreceived.HebergerReceivedActivity;
 import com.team.dream.sleepsafe.herbergerconnection.HebergerConnectionActivity;
 import com.team.dream.sleepsafe.utils.MyFirebaseMessagingService;
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
         btnHeberger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, HebergerConnectionActivity.class));
+                startActivity(new Intent(MainActivity.this, HebergerInscriptionActivity.class));
             }
         });
     }

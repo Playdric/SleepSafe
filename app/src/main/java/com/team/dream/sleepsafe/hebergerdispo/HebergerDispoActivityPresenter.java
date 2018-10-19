@@ -32,6 +32,8 @@ public class HebergerDispoActivityPresenter implements IHebergerDispoActivityPre
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        view.openCall();
+        /*
         AndroidNetworking.put(BaseApplication.BASE_URL + "/sinister")
                 .addJSONObjectBody(jsonObject)
                 .build()
@@ -46,5 +48,6 @@ public class HebergerDispoActivityPresenter implements IHebergerDispoActivityPre
                         view.sendError(anError);
                     }
                 });
+                */
     }
 }

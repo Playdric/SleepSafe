@@ -16,7 +16,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginRight="80dp"
         android:fontFamily="casual"
-        android:text="Hébergeur"
+        android:text="Inscription Hébergeur"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_stricken"
         app:layout_constraintHorizontal_bias="0.0"

@@ -63,6 +63,6 @@ public class HebergerConnectionActivity extends AppCompatActivity implements IHe
     @Override
     public void launchHebergerInfo() {
         finishAndRemoveTask();
-        Toast.makeText(this, "Tu peux quitter stp", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Vous pouvez quitter l'application.", Toast.LENGTH_SHORT).show();
     }
 }

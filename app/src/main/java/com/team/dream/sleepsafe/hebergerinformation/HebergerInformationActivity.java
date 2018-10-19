@@ -252,7 +252,7 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
             jsonObject.accumulate("id_host", idHost);
         } catch (JSONException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Ca a buggé", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Une erreur est survenue", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -264,7 +264,7 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d("TAG", response.toString());
-                        Toast.makeText(HebergerInformationActivity.this, "Le type a été prévenu, tu peux quitter, il va t'appelee", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(HebergerInformationActivity.this, "La personne a été prévenue, tu peux quitter, elle va vous appeler", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
