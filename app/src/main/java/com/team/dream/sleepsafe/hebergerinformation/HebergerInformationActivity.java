@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Criteria;
@@ -199,11 +200,13 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
                     edtMaxDistance.setText("0");
                     jsonObject.put("distance", "0");
                 }
+                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("pref", Context.MODE_PRIVATE);
+                String id = sharedPreferences.getString("id_phone", "0");
                 jsonObject.put("address_name", edtRoad.getText().toString());
                 jsonObject.put("address_zipcode", edtSipCode.getText().toString());
                 jsonObject.put("address_city", edtCity.getText().toString());
                 jsonObject.put("nb_bed", edtPlaces.getText().toString());
-                //jsonObject.put("id_user", "1");
+                jsonObject.put("id_user", id);
 
             } catch (JSONException e) {
                 e.printStackTrace();
