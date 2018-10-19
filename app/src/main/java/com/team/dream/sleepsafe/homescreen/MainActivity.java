@@ -31,9 +31,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
         Intent i = getIntent();
         if (i != null) {
             Bundle b = i.getExtras();
-            if (b != null) {
-                Log.d("BITE", "onCreate: " + b.getString("phone"));
-            }
         }
         initView();
         initListener();
@@ -45,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
         mSiniterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, NewSinisterActivity.class));
+                startActivity(new Intent(MainActivity.this, HebergerAcceptActivity.class));
             }
         });
 

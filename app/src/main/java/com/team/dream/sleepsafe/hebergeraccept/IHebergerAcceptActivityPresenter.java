@@ -4,5 +4,4 @@ public interface IHebergerAcceptActivityPresenter {
 
     void getData();
 
-    void validateSinister();
 }

@@ -51,8 +51,6 @@ public class HebergerInscriptionActivityPresenter implements IHebergerInscriptio
             e.printStackTrace();
         }
 
-        Log.d("bite", user.toString());
-
         AndroidNetworking.post(BaseApplication.BASE_URL+ "/user/")
                 .addJSONObjectBody(user)
                 .setPriority(Priority.MEDIUM)
