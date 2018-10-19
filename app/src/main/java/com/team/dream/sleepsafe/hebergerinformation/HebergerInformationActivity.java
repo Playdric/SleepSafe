@@ -203,7 +203,7 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
                 jsonObject.put("address_zipcode", edtSipCode.getText().toString());
                 jsonObject.put("address_city", edtCity.getText().toString());
                 jsonObject.put("nb_bed", edtPlaces.getText().toString());
-                jsonObject.put("id_user", "1");
+                //jsonObject.put("id_user", "1");
 
             } catch (JSONException e) {
                 e.printStackTrace();
