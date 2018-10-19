@@ -9,6 +9,7 @@ import com.google.firebase.messaging.RemoteMessage;
 
 public class MyFireBaseMessagingService extends FirebaseMessagingService {
     private static final String TAG = "MyFirebaseMessagingServ";
+    SharedPreferences sharedPreferences;
 
     @Override
     public void onNewToken(String token) {
@@ -38,8 +39,13 @@ public class MyFireBaseMessagingService extends FirebaseMessagingService {
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
 
+            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+            sharedPreferences
+                    .edit()
+                    .putString("phone", remoteMessage.getData().get("phone"))
+                    .putString("address",remoteMessage.getData().get("address"))
+                    .apply();
         }
 
         // Check if message contains a notification payload.

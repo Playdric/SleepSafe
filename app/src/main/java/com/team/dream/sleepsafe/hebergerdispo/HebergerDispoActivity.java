@@ -53,7 +53,9 @@ public class HebergerDispoActivity extends AppCompatActivity implements IHeberge
     private void initView() {
         hostName = findViewById(R.id.title_heberger);
         hostAdress = findViewById(R.id.adress_heberger);
+        hostAdress.setText(sharedPreferences.getString("address","0"));
         hostPhone = findViewById(R.id.phone_heberger);
+        hostPhone.setText(sharedPreferences.getString("phone","0"));
         acceptBtn = findViewById(R.id.btn_validate_heberger);
         presenter    = new HebergerDispoActivityPresenter(this , this);
     }
@@ -136,11 +138,13 @@ public class HebergerDispoActivity extends AppCompatActivity implements IHeberge
         sharedPreferences
                 .edit()
                 .putString("phone", hostPhone.getText().toString())
-                .putString("adress",hostAdress.getText().toString())
+                .putString("address",hostAdress.getText().toString())
                 .apply();
     }
 
     public void getContact() {
+        sharedPreferences.getString("phone","0");
+        sharedPreferences.getString("address","0");
         /*if il y a des données de notif push
         hostPhone.setText(phone);
         hostAdress.setText(adresse);
