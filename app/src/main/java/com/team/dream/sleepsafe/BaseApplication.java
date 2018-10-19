@@ -6,7 +6,7 @@ import com.androidnetworking.AndroidNetworking;
 
 public class BaseApplication extends Application {
 
-    public static String BASE_URL = "http://10.0.2.2:3000";
+    public static String BASE_URL = "http://192.168.43.113:3000";
     public static final String FCM_ID = "FCM_ID";
 
     @Override

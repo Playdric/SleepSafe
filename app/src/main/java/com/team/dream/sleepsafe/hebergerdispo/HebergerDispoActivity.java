@@ -143,8 +143,14 @@ public class HebergerDispoActivity extends AppCompatActivity implements IHeberge
     }
 
     public void getContact() {
-        sharedPreferences.getString("phone","0");
-        sharedPreferences.getString("address","0");
+        Intent i = getIntent();
+        if (i != null) {
+            Bundle b = i.getExtras();
+            if (b != null) {
+                hostPhone.setText(b.getString("phone"));
+                hostAdress.setText(b.getString("address"));
+            }
+        }
         /*if il y a des données de notif push
         hostPhone.setText(phone);
         hostAdress.setText(adresse);
