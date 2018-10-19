@@ -37,8 +37,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Code Postal"
                 android:theme="@style/MyEditText"
-                android:textSize="14dp"
-                android:textColor="@color/primary_dark"/>
+                android:textSize="14dp"/>
 
             <EditText
                 android:id="@+id/edt_city"
@@ -47,8 +46,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Ville"
                 android:theme="@style/MyEditText"
-                android:textSize="14dp"
-                android:textColor="@color/primary_dark"/>
+                android:textSize="14dp"/>
 
         </LinearLayout>
 
@@ -58,8 +56,7 @@
             android:layout_height="wrap_content"
             android:hint="Adresse"
             android:theme="@style/MyEditText"
-            android:textSize="14dp"
-            android:textColor="@color/primary_dark"/>
+            android:textSize="14dp"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_i_live_here"
@@ -75,12 +72,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
+                android:layout_marginTop="7dp"
                 android:textSize="14dp"
                 android:text="Place(s) disponible(s)"
                 android:textColor="@color/accent"
@@ -88,13 +86,14 @@
 
             <EditText
                 android:id="@+id/edt_places_dispo"
-                android:layout_weight="2"
-                android:layout_width="0dp"
-                android:inputType="number"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 android:hint=""
-                android:textSize="15dp"
-                android:textColor="@color/primary_dark"/>
+                android:inputType="number"
+                android:theme="@style/MyEditText"
+                android:layout_marginLeft="30dp"
+                android:textSize="14dp"
+                android:layout_width="0dp" />
 
         </LinearLayout>
 
@@ -104,11 +103,12 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_weight="5"
+                android:layout_weight="2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="Distance maximale (en m)"
+                android:layout_marginTop="7dp"
+                android:textSize="14dp"
+                android:text="Distance maximale"
                 android:textColor="@color/accent"
                 />
 
@@ -117,33 +117,33 @@
                 android:layout_weight="2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint=""
+                android:hint="En mètre(s)"
                 style="@style/MyEditText"
-                android:textSize="15dp"
-                android:textColor="@color/primary_dark"/>
+                android:theme="@style/MyEditText"
+                android:layout_marginLeft="8dp"
+                android:textSize="14dp"/>
 
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
             android:orientation="horizontal">
 
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14dp"
+                android:text="Je peux aller les chercher"
+                android:textColor="@color/accent"
+                />
 
             <CheckBox
                 android:id="@+id/chb_take_em"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="100dp"
+                android:layout_marginLeft="70dp"
                 android:checked="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20dp"
-                android:text="Je peux aller les chercher"
-                android:textColor="@color/accent"
-                />
 
         </LinearLayout>
 
@@ -152,7 +152,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:textSize="20dp"
             android:text="Continuer"/>
 
