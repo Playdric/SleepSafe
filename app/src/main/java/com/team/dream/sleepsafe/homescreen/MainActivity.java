@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
         mSiniterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, HebergerAcceptActivity.class));
+                startActivity(new Intent(MainActivity.this, NewSinisterActivity.class));
             }
         });
 
