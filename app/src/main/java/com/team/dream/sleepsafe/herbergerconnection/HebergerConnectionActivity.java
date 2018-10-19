@@ -62,6 +62,6 @@ public class HebergerConnectionActivity extends AppCompatActivity implements IHe
 
     @Override
     public void launchHebergerInfo() {
-        startActivity(new Intent(HebergerConnectionActivity.this, HebergerInformationActivity.class));
+        finishAndRemoveTask();
     }
 }
