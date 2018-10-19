@@ -14,12 +14,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="cursive"
             android:gravity="center"
             android:textSize="30dp"
-            android:text="Renseignez vos coordonnées"
             android:layout_marginTop="30dp"
-            android:textColor="@color/accent"
-            />
+            android:textColor="@color/primary"
+            android:text="Renseignez vos coordonnées" />
 
         <EditText
             android:id="@+id/edt_email"
@@ -27,33 +27,37 @@
             android:layout_height="wrap_content"
             android:hint="Email"
             android:inputType="textEmailAddress"
-            android:textSize="15dp"
-            android:textColor="@color/primary_dark"/>
+            android:theme="@style/MyEditText"
+            android:layout_marginTop="15dp"
+            android:textSize="14dp" />
 
         <EditText
             android:id="@+id/edt_firstname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nom"
-            android:textSize="15dp"
-            android:textColor="@color/primary_dark"/>
+            android:hint="Pseudo"
+            android:theme="@style/MyEditText"
+            android:textSize="14dp"
+            android:layout_marginTop="15dp"/>
 
         <EditText
             android:id="@+id/edt_lastname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Prénom"
-            android:textSize="15dp"
-            android:textColor="@color/primary_dark"/>
+            android:textSize="14dp"
+            android:theme="@style/MyEditText"
+            android:layout_marginTop="15dp"/>
 
         <EditText
             android:id="@+id/edt_phone_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Téléphone"
-            android:textSize="15dp"
-            android:inputType="phone"
-            android:textColor="@color/primary_dark"/>
+            android:layout_marginTop="15dp"
+            android:textSize="14dp"
+            android:theme="@style/MyEditText"
+            android:inputType="phone"/>
 
         <EditText
             android:id="@+id/edt_password"
@@ -61,8 +65,9 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:hint="Mot de passe"
-            android:textSize="15dp"
-            android:textColor="@color/primary_dark"/>
+            android:theme="@style/MyEditText"
+            android:textSize="14dp"
+            android:layout_marginTop="20dp" />
 
         <EditText
             android:id="@+id/edt_password_confirmation"
@@ -70,16 +75,18 @@
             android:inputType="textPassword"
             android:layout_height="wrap_content"
             android:hint="Confirmation"
-            android:textSize="15dp"
-            android:textColor="@color/primary_dark"/>
+            android:theme="@style/MyEditText"
+            android:textSize="14dp"
+            android:layout_marginTop="15dp"/>
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_inscription"
-            android:layout_width="wrap_content"
+            android:layout_width="149dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="20dp"
-            android:text="Connexion"/>
+            android:layout_marginTop="20dp"
+            android:text="Valider"
+            android:textSize="20dp" />
 
 
     </LinearLayout>

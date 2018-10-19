@@ -12,4 +12,13 @@
         <item name="android:focusable">true</item>
         <item name="android:clickable">true</item>
     </style>
+
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+    </style>
+
+    <style name="MyEditText" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/primary</item>
+        <item name="colorControlActivated">@color/primary_dark</item>
+    </style>
+
 </resources>

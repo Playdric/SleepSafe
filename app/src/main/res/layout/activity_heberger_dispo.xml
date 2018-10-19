@@ -1,85 +1,96 @@
-<?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<?xml version="1.0" encoding="UTF-8"?>
+
+<android.support.constraint.ConstraintLayout
+    tools:context=".hebergerdispo.HebergerDispoActivity"
     android:layout_height="match_parent"
-    tools:context=".hebergerdispo.HebergerDispoActivity">
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
     <LinearLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_width="match_parent"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/title_heberger"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:fontFamily="cursive"
             android:gravity="center"
             android:textSize="30dp"
-            android:text="Tersou ce fdp peut vous héberger !"
             android:layout_marginTop="30dp"
-            android:textColor="@color/accent"
-            />
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/primary"
+            android:text="Tersou ce fdp peut vous héberger !"
+            android:id="@+id/title_heberger"/>
+
 
         <LinearLayout
-            android:layout_margin="30dp"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/position"
-                />
+                android:layout_width="44dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="25dp"
+                android:src="@drawable/position" />
 
             <TextView
-                android:id="@+id/adress_heberger"
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="30dp"
+                android:layout_width="match_parent"
+                android:textColor="@color/accent"
                 android:text="420 allée des guédro"
                 android:textSize="20dp"
-                android:textColor="@color/accent"
-                android:onClick="openMaps"
+                android:id="@+id/adress_heberger"
+                android:layout_margin="30dp"
                 android:clickable="true"
-                />
+                android:onClick="openMaps"/>
+
         </LinearLayout>
+
 
         <LinearLayout
-            android:layout_margin="30dp"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/phone"
-                />
+                android:layout_width="44dp"
+                android:layout_height="42dp"
+                android:layout_marginTop="22dp"
+                android:src="@drawable/phone" />
 
             <TextView
-                android:id="@+id/phone_heberger"
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="30dp"
+                android:layout_width="match_parent"
+                android:textColor="@color/accent"
                 android:text="06 00 00 00 00"
                 android:textSize="20dp"
-                android:textColor="@color/accent"
-                android:onClick="openCall"
+                android:id="@+id/phone_heberger"
+                android:layout_margin="30dp"
                 android:clickable="true"
-                />
+                android:onClick="openCall"/>
+
         </LinearLayout>
 
-            <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_validate_heberger"
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="20dp"
-                android:text="Je confirme"/>
-
+        <android.support.v7.widget.AppCompatButton
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_margin="50dp"
+            android:text="Je confirme"
+            android:textSize="20dp"
+            android:id="@+id/btn_validate_heberger"
+            android:layout_gravity="center" />
 
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>
