@@ -2,6 +2,7 @@ package com.team.dream.sleepsafe.hebergeraccept.adapter;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -40,7 +41,7 @@ public class SinisterAdapter extends RecyclerView.Adapter<SinisterAdapter.MyView
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final Sinister sinister = sinisters.get(position);
         holder.name.setText(sinister.getComment());
-        holder.nbPeople.setText(sinister.getNbPeople() + "");
+        holder.nbPeople.setText(activity.getApplicationContext().getString(R.string.nb_people, sinister.getNbPeople()));
         holder.btnSeeMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
