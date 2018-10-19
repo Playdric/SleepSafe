@@ -52,6 +52,8 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
     private Button btnValidate;
     private CheckBox chbTakeEm;
 
+    private String idPhone;
+
     LocationManager locationManager;
     String provider;
     FusedLocationProviderClient mFusedLocationClient;
@@ -61,6 +63,9 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_heberger_information);
+
+        Intent i = getIntent();
+        idPhone = i.getStringExtra("sinister");
 
         initView();
     }
@@ -221,7 +226,7 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
                             Log.d("TAG", response.toString());
                             try {
                                 String id = response.getString("id");
-
+                                sinisterHosting(id);
 
                             } catch (JSONException e){
                                 e.printStackTrace();
@@ -241,8 +246,6 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
 
         JSONObject jsonObject = new JSONObject();
 
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("pref", MODE_PRIVATE);
-        String idPhone = sharedPreferences.getString("id_phone", "0");
 
         try {
             jsonObject.accumulate("id_phone", idPhone);
@@ -254,7 +257,7 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
         }
 
 
-        AndroidNetworking.post(BaseApplication.BASE_URL + "/host")
+        AndroidNetworking.put(BaseApplication.BASE_URL + "/sinister/hosting")
                 .addJSONObjectBody(jsonObject)
                 .build()
                 .getAsJSONObject(new JSONObjectRequestListener() {

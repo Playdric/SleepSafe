@@ -50,7 +50,7 @@ public class HebergerAcceptActivity extends AppCompatActivity  implements IHeber
         recyclerView.setAdapter(adapter);
     }
 
-    public void doSmth(Sinister sinister) {
+    public void doSmth(final Sinister sinister) {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_AppCompat_Light_Dialog))
                 .setTitle("details")
@@ -58,7 +58,9 @@ public class HebergerAcceptActivity extends AppCompatActivity  implements IHeber
                 .setPositiveButton("accepter", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        startActivity(new Intent(HebergerAcceptActivity.this, HebergerInformationActivity.class));
+                        Intent i=new Intent(HebergerAcceptActivity.this,HebergerInformationActivity.class);
+                        i.putExtra("sinister", sinister.getIdPhone());
+                        startActivity(i);
                     }
                 })
                 .setNegativeButton("non", new DialogInterface.OnClickListener() {
