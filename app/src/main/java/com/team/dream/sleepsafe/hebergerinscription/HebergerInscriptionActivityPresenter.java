@@ -58,6 +58,16 @@ public class HebergerInscriptionActivityPresenter implements IHebergerInscriptio
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        Log.d("connection response:", response.toString());
+                        SharedPreferences sp = context.getSharedPreferences("pref", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor e = sp.edit();
+                        try {
+                            String user = response.getString("id_user");
+                            e.putString("id_user", user);
+                            e.apply();
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
                         view.launchHebergerInfo();
                     }
                     @Override
