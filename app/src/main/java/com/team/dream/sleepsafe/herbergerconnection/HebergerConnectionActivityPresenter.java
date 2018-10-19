@@ -52,6 +52,15 @@ public class HebergerConnectionActivityPresenter implements IHebergerConnectionA
                 .getAsJSONObject(new JSONObjectRequestListener() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        Log.d("connection response:", response.toString());
+                        SharedPreferences sp = context.getSharedPreferences("pref", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor e = sp.edit();
+                        try {
+                            e.putString("id_phone", response.getString("id_phone"));
+                            e.apply();
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
                         view.launchHebergerInfo();
                     }
                     @Override
