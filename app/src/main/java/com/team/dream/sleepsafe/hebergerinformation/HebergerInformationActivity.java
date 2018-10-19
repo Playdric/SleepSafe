@@ -218,7 +218,14 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
                     .getAsJSONObject(new JSONObjectRequestListener() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            System.out.print("ca marche");
+                            Log.d("TAG", response.toString());
+                            try {
+                                String id = response.getString("id");
+
+
+                            } catch (JSONException e){
+                                e.printStackTrace();
+                            }
                         }
 
                         @Override
@@ -227,6 +234,41 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
                         }
                     });
         }
+    }
+
+
+    private void sinisterHosting(String idHost) {
+
+        JSONObject jsonObject = new JSONObject();
+
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("pref", MODE_PRIVATE);
+        String idPhone = sharedPreferences.getString("id_phone", "0");
+
+        try {
+            jsonObject.accumulate("id_phone", idPhone);
+            jsonObject.accumulate("id_host", idHost);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Ca a buggé", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+        AndroidNetworking.post(BaseApplication.BASE_URL + "/host")
+                .addJSONObjectBody(jsonObject)
+                .build()
+                .getAsJSONObject(new JSONObjectRequestListener() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("TAG", response.toString());
+                        Toast.makeText(HebergerInformationActivity.this, "Le type a été prévenu, tu peux quitter, il va t'appelee", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        System.out.print(anError);
+                    }
+                });
     }
 }
 

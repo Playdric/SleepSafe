@@ -1,6 +1,7 @@
 package com.team.dream.sleepsafe.hebergeraccept;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.hebergeraccept.adapter.SinisterAdapter;
 import com.team.dream.sleepsafe.hebergeraccept.model.Sinister;
+import com.team.dream.sleepsafe.hebergerinformation.HebergerInformationActivity;
 
 import java.util.ArrayList;
 
@@ -56,8 +58,7 @@ public class HebergerAcceptActivity extends AppCompatActivity  implements IHeber
                 .setPositiveButton("accepter", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        presenter.validateSinister();
-                        Toast.makeText(HebergerAcceptActivity.this, "on a bien pris en compte, tu peux fermer l'app", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(HebergerAcceptActivity.this, HebergerInformationActivity.class));
                     }
                 })
                 .setNegativeButton("non", new DialogInterface.OnClickListener() {

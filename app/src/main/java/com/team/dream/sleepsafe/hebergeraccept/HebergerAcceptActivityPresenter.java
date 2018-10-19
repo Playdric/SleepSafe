@@ -53,21 +53,4 @@ public class HebergerAcceptActivityPresenter implements IHebergerAcceptActivityP
                     }
                 });
     }
-
-    @Override
-    public void validateSinister() {
-        AndroidNetworking.get(BaseApplication.BASE_URL + "/host/accept_sinister")
-                .build()
-                .getAsJSONArray(new JSONArrayRequestListener() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Log.d("error", anError.getErrorDetail());
-                    }
-                });
-    }
 }
