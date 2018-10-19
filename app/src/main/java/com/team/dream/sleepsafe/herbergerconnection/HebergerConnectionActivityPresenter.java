@@ -56,7 +56,8 @@ public class HebergerConnectionActivityPresenter implements IHebergerConnectionA
                         SharedPreferences sp = context.getSharedPreferences("pref", Context.MODE_PRIVATE);
                         SharedPreferences.Editor e = sp.edit();
                         try {
-                            e.putString("id_phone", response.getString("id_phone"));
+                            JSONObject user = response.getJSONObject("user");
+                            e.putString("id_user", user.getString("id"));
                             e.apply();
                         } catch (JSONException e1) {
                             e1.printStackTrace();

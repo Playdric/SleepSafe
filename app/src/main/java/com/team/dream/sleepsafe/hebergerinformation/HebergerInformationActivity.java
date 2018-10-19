@@ -201,7 +201,7 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
                     jsonObject.put("distance", "0");
                 }
                 SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("pref", Context.MODE_PRIVATE);
-                String id = sharedPreferences.getString("id_phone", "0");
+                String id = sharedPreferences.getString("id_user", "0");
                 jsonObject.put("address_name", edtRoad.getText().toString());
                 jsonObject.put("address_zipcode", edtSipCode.getText().toString());
                 jsonObject.put("address_city", edtCity.getText().toString());
