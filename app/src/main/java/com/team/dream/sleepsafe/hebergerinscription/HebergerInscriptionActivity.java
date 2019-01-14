@@ -68,7 +68,7 @@ public class HebergerInscriptionActivity extends AppCompatActivity implements IH
 
     @Override
     public void launchHebergerInfo() {
-        //startActivity(new Intent(HebergerInscriptionActivity.this, HebergerInformationActivity.class));
+        startActivity(new Intent(HebergerInscriptionActivity.this, HebergerInformationActivity.class));
         setContentView(R.layout.ok_activity);
     }
 }
