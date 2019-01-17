@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".newsinister.NewSinisterActivity">
+    tools:context=".newsinister.NewSinisterActivity"
+    tools:layout_editor_absoluteY="81dp">
 
     <LinearLayout
 
@@ -15,47 +16,79 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:fontFamily="cursive"
             android:gravity="center"
-            android:textSize="30dp"
             android:text="Renseignez votre situation"
-            android:layout_marginTop="30dp"
             android:textColor="@color/primary"
-            />
+            android:textSize="30dp" />
+
+        <EditText
+            android:id="@+id/tdt_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="Nom"
+            android:inputType="text"
+            android:scrollbars="vertical"
+            android:theme="@style/MyEditText" />
+
+        <EditText
+        android:id="@+id/tdt_surname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="prénom"
+        android:inputType="text"
+        android:scrollbars="vertical"
+        android:theme="@style/MyEditText" />
+
+        <EditText
+            android:id="@+id/tdt_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="téléphone"
+            android:inputType="phone"
+            android:scrollbars="vertical"
+            android:theme="@style/MyEditText" />
 
         <EditText
             android:id="@+id/tdt_nb_people"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="30dp"
-            android:theme="@style/MyEditText"
+            android:layout_margin="10dp"
             android:hint="Nombre de personnes ?"
-            android:scrollbars="vertical"
             android:inputType="number"
-            />
+            android:scrollbars="vertical"
+            android:theme="@style/MyEditText" />
 
         <EditText
             android:id="@+id/new_sinister_comm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:theme="@style/MyEditText"
+            android:layout_margin="10dp"
             android:hint="Un détail ?.."
+            android:inputType="textMultiLine"
             android:maxLines="10"
             android:scrollbars="vertical"
-            android:inputType="textMultiLine"
-            />
+            android:theme="@style/MyEditText" />
 
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_validate_sinister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="60dp"
-            android:textSize="20dp"
-            android:text="Je suis en galère"/>
+            android:layout_marginTop="20dp"
+            android:text="Comfirmer"
+            android:textSize="20dp" />
 
     </LinearLayout>
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left" />
 
 </android.support.constraint.ConstraintLayout>

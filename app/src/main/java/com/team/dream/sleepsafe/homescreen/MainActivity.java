@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements IMainActivity{
         btnHeberger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, HebergerInscriptionActivity.class));
+                startActivity(new Intent(MainActivity.this, HebergerConnectionActivity.class));
             }
         });
     }

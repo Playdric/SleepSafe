@@ -41,6 +41,9 @@ public class NewSinisterActivity extends AppCompatActivity implements INewSinist
     SharedPreferences sharedPreferences;
     NewSinisterActivityPresenter presenter;
     private EditText edtNbPeople;
+    private EditText edtName;
+    private EditText edtSurname;
+    private EditText edtPhoneNumber;
 
     LocationManager locationManager;
     String provider;
@@ -70,6 +73,9 @@ public class NewSinisterActivity extends AppCompatActivity implements INewSinist
         comm = findViewById(R.id.new_sinister_comm);
         presenter = new NewSinisterActivityPresenter(this, this);
         edtNbPeople = findViewById(R.id.tdt_nb_people);
+        edtName = findViewById(R.id.tdt_name);
+        edtSurname = findViewById(R.id.tdt_surname);
+        edtPhoneNumber = findViewById(R.id.tdt_phone);
 
     }
 
@@ -119,8 +125,8 @@ public class NewSinisterActivity extends AppCompatActivity implements INewSinist
                 != PackageManager.PERMISSION_GRANTED) {
 
             new AlertDialog.Builder(this)
-                    .setTitle("On a besoin de te localisation")
-                    .setMessage("Sinon on pourra pas valider que t'es en galère")
+                    .setTitle("On a besoin de vous localiser")
+                    .setMessage("Afin d'en informer votre future hébergeur")
                     .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -167,6 +173,9 @@ public class NewSinisterActivity extends AppCompatActivity implements INewSinist
             @Override
             public void onClick(View v) {
                 presenter.sendSinister(
+                        edtName.getText().toString(),
+                        edtSurname.getText().toString(),
+                        Integer.valueOf(edtPhoneNumber.getText().toString()),
                         Integer.valueOf(edtNbPeople.getText().toString()),
                         comm.getText().toString(),
                         loc,
