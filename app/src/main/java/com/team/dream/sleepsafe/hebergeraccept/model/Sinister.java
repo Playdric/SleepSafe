@@ -2,12 +2,18 @@ package com.team.dream.sleepsafe.hebergeraccept.model;
 
 public class Sinister {
 
+    private String name;
+    private String surname;
+    private int phoneNumber;
     private String idPhone;
     private int nbPeople;
     private String comment;
     private String localisation;
 
-    public Sinister(int nbPeople, String comment, String localisation, String idPhone) {
+    public Sinister(String name, String surname, int phoneNumber, int nbPeople, String comment, String localisation, String idPhone) {
+        this.name = name;
+        this.surname = surname;
+        this.phoneNumber = phoneNumber;
         this.nbPeople = nbPeople;
         this.comment = comment;
         this.localisation = localisation;
@@ -45,5 +51,29 @@ public class Sinister {
 
     public void setIdPhone(String idPhone) {
         this.idPhone = idPhone;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

@@ -1,16 +1,20 @@
 package com.team.dream.sleepsafe.herbergerconnection;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.team.dream.sleepsafe.BaseApplication;
+import com.team.dream.sleepsafe.hebergerhome.HebergerHomeActivity;
+import com.team.dream.sleepsafe.hebergerinformation.HebergerInformationActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +34,7 @@ public class HebergerConnectionActivityPresenter implements IHebergerConnectionA
 
     @Override
     public void connection(String pseudo, String password) {
+       /*
         if(pseudo.isEmpty() || password.isEmpty()) {
             view.errorFields("Remplis tous les champs");
             return;
@@ -69,5 +74,7 @@ public class HebergerConnectionActivityPresenter implements IHebergerConnectionA
                         view.errorFields(error.getErrorBody());
                     }
                 });
+*/
+
     }
 }

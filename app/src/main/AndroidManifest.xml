@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".hebergerhome.HebergerHomeActivity" />
         <activity android:name=".hebergerreceived.HebergerReceivedActivity" />
         <activity android:name=".herbergerconnection.HebergerConnectionActivity" />
         <activity android:name=".hebergerinscription.HebergerInscriptionActivity" />

@@ -39,7 +39,7 @@ public class HebergerAcceptActivityPresenter implements IHebergerAcceptActivityP
                             // do anything with response
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject o = response.getJSONObject(i);
-                                sinisters.add(new Sinister(o.getInt("nb_people"), o.getString("comment"), o.getString("localisation"), o.getString("id_phone")));
+                                sinisters.add(new Sinister(o.getString("name"), o.getString("surname"), o.getInt("phoneNumber"), o.getInt("nb_people"), o.getString("comment"), o.getString("localisation"), o.getString("id_phone")));
                             }
 
                             view.fillData(sinisters);

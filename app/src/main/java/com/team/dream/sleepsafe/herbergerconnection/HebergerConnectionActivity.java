@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.team.dream.sleepsafe.R;
+import com.team.dream.sleepsafe.hebergerhome.HebergerHomeActivity;
 import com.team.dream.sleepsafe.hebergerinformation.HebergerInformationActivity;
 import com.team.dream.sleepsafe.hebergerinscription.HebergerInscriptionActivity;
 
@@ -41,7 +42,8 @@ public class HebergerConnectionActivity extends AppCompatActivity implements IHe
         btnConnection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.connection(edtEmail.getText().toString(), edtPassword.getText().toString());
+                //presenter.connection(edtEmail.getText().toString(), edtPassword.getText().toString());
+                startActivity(new Intent(HebergerConnectionActivity.this, HebergerHomeActivity.class));
             }
         });
 

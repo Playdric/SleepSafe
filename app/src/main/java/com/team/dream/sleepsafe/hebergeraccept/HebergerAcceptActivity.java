@@ -17,6 +17,8 @@ import com.team.dream.sleepsafe.hebergeraccept.adapter.SinisterAdapter;
 import com.team.dream.sleepsafe.hebergeraccept.model.Sinister;
 import com.team.dream.sleepsafe.hebergerinformation.HebergerInformationActivity;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class HebergerAcceptActivity extends AppCompatActivity  implements IHebergerAcceptActivity{
@@ -39,6 +41,12 @@ public class HebergerAcceptActivity extends AppCompatActivity  implements IHeber
         presenter.getData();
 
         presenter = new HebergerAcceptActivityPresenter(this, this);
+
+        /// test
+        ArrayList<Sinister> sinisters = new ArrayList<>();
+        sinisters.add(new Sinister("paul", "finet", 0606060606, 3, "commentaire test", "rue test", "id_phone test"));
+        fillData(sinisters);
+        ////////////////////////
     }
 
     @Override
@@ -54,7 +62,8 @@ public class HebergerAcceptActivity extends AppCompatActivity  implements IHeber
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_AppCompat_Light_Dialog))
                 .setTitle("details")
-                .setMessage(sinister.getComment())
+                .setMessage("Sinistré : " + sinister.getSurname() + " " + sinister.getName() + "\n\n Téléphone :  " + String.valueOf(sinister.getPhoneNumber()) + "\n\n Commentaire :  " + sinister.getComment())
+
                 .setPositiveButton("accepter", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
