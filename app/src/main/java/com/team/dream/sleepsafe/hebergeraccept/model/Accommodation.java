@@ -1,15 +1,15 @@
 package com.team.dream.sleepsafe.hebergeraccept.model;
 
-public class accommodation {
+public class Accommodation {
 
     private String address;
     private String city;
     private int zipcode;
     private int nb_bed;
     private int id_user;
-    private String bed_available;
+    private int bed_available;
 
-    public accommodation(String address, String city, int zipcode, int nb_bed, int id_user, String bed_available) {
+    public Accommodation(String address, String city, int zipcode, int nb_bed, int id_user, int bed_available) {
         this.address = address;
         this.city = city;
         this.zipcode = zipcode;
@@ -58,11 +58,11 @@ public class accommodation {
         this.id_user = id_user;
     }
 
-    public String getBed_avalable() {
+    public int getBed_avalable() {
         return bed_available;
     }
 
-    public void setBed_avalable(String bed_avalable) {
+    public void setBed_avalable(int bed_avalable) {
         this.bed_available = bed_avalable;
     }
 
