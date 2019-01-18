@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.androidnetworking.error.ANError;
 import com.team.dream.sleepsafe.MyFireBaseMessagingService;
 import com.team.dream.sleepsafe.R;
+import com.team.dream.sleepsafe.chatApplication.ChatApplicationActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -64,6 +65,7 @@ public class HebergerDispoActivity extends AppCompatActivity implements IHeberge
         hostPhone.setText(phoneNumber);
         acceptBtn = findViewById(R.id.btn_validate_heberger);
         presenter    = new HebergerDispoActivityPresenter(this , this);
+
     }
 
     @Override
