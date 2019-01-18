@@ -15,18 +15,18 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_height="wrap_content"
+            android:id="@+id/title_heberger"
             android:layout_width="match_parent"
-            android:fontFamily="cursive"
-            android:gravity="center"
-            android:textSize="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
+            android:fontFamily="cursive"
+            android:gravity="center"
+            android:text="xxxxxx peut vous héberger !"
             android:textColor="@color/primary"
-            android:text="Tersou ce fdp peut vous héberger !"
-            android:id="@+id/title_heberger"/>
+            android:textSize="30dp" />
 
 
         <LinearLayout

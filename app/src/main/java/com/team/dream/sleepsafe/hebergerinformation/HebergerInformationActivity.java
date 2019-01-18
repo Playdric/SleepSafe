@@ -33,6 +33,8 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.team.dream.sleepsafe.BaseApplication;
 import com.team.dream.sleepsafe.R;
+import com.team.dream.sleepsafe.hebergerhome.HebergerHomeActivity;
+import com.team.dream.sleepsafe.hebergerhome.HebergerHomeActivityPresenter;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -224,13 +226,15 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
                         @Override
                         public void onResponse(JSONObject response) {
                             Log.d("TAG", response.toString());
+
+                           /*
                             try {
                                 String id = response.getString("id");
                                 sinisterHosting(id);
 
                             } catch (JSONException e){
                                 e.printStackTrace();
-                            }
+                            }*/
                         }
 
                         @Override
@@ -238,6 +242,11 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
                             System.out.print(anError);
                         }
                     });
+
+            // il faut placer ces deux ligne dans la réponse de l'api, si le logement a été ajouté en base
+            Toast.makeText(this, "Votre lieu d'ébergement a été ajouté", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(HebergerInformationActivity.this, HebergerHomeActivity.class));
+
         }
     }
 

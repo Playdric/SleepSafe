@@ -107,10 +107,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="7dp"
-                android:textSize="14dp"
                 android:text="Distance maximale"
                 android:textColor="@color/accent"
-                />
+                android:textSize="14dp" />
 
             <EditText
                 android:id="@+id/edt_max_distance"

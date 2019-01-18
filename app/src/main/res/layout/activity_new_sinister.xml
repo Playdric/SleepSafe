@@ -17,11 +17,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:fontFamily="cursive"
             android:gravity="center"
             android:text="Renseignez votre situation"
             android:textColor="@color/primary"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            android:fontFamily="cursive"/>
 
         <EditText
             android:id="@+id/tdt_name"
