@@ -3,6 +3,7 @@ package com.team.dream.sleepsafe.hebergerinscription;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 
 import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.hebergerinformation.HebergerInformationActivity;
+import com.team.dream.sleepsafe.herbergerconnection.HebergerConnectionActivity;
 
 public class HebergerInscriptionActivity extends AppCompatActivity implements IHebergerInscriptionActivity {
 
@@ -67,8 +69,7 @@ public class HebergerInscriptionActivity extends AppCompatActivity implements IH
     }
 
     @Override
-    public void launchHebergerInfo() {
-        startActivity(new Intent(HebergerInscriptionActivity.this, HebergerInformationActivity.class));
-        setContentView(R.layout.ok_activity);
-    }
+    public void launchConnection() {
+        startActivity(new Intent(HebergerInscriptionActivity.this, HebergerConnectionActivity.class));
+     }
 }

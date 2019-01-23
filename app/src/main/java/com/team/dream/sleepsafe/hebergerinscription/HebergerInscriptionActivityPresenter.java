@@ -38,13 +38,14 @@ public class HebergerInscriptionActivityPresenter extends AppCompatActivity impl
     @Override
     public void registration(final String email, final String firstname, final String lastname, final String phoneNumber, final String password, final String passwordConfirmation) {
 
+
         if(email.isEmpty() || password.isEmpty() || passwordConfirmation.isEmpty() || firstname.isEmpty() || lastname.isEmpty() || phoneNumber.isEmpty()) {
             view.errorFields("Remplis tous les champs");
-            return;
+            return ;
         }
         if (!TextUtils.equals(password, passwordConfirmation)) {
             view.errorFields("Les deux mots de passe ne correspondent pas");
-            return;
+            return ;
         }
 
         SharedPreferences sharedPref = context.getSharedPreferences("pref", Context.MODE_PRIVATE);
@@ -61,7 +62,6 @@ public class HebergerInscriptionActivityPresenter extends AppCompatActivity impl
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                             Map<String, Object> user = new HashMap<>();
                             user.put("id_phone", fcmId);
-                            user.put("email", email);
                             user.put("firstname", firstname);
                             user.put("lastname", lastname);
                             user.put("phone_number", phoneNumber);
@@ -70,7 +70,7 @@ public class HebergerInscriptionActivityPresenter extends AppCompatActivity impl
                                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                                         @Override
                                         public void onSuccess(DocumentReference documentReference) {
-                                            //startActivity(new Intent(HebergerInscriptionActivityPresenter.this, HebergerConnectionActivity.class));
+                                            view.launchConnection();
                                             Log.d("tag", "DocumentSnapshot added with ID: " + documentReference.getId());
                                         }
                                     })

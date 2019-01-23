@@ -4,6 +4,6 @@ public interface IHebergerInscriptionActivity {
 
     void errorFields(String error);
 
-    void launchHebergerInfo();
+    void launchConnection();
 
 }

@@ -13,6 +13,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
@@ -30,18 +31,26 @@ import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.team.dream.sleepsafe.BaseApplication;
 import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.hebergerhome.HebergerHomeActivity;
 import com.team.dream.sleepsafe.hebergerhome.HebergerHomeActivityPresenter;
+import com.team.dream.sleepsafe.hebergerinscription.HebergerInscriptionActivity;
+import com.team.dream.sleepsafe.hebergerinscription.HebergerInscriptionActivityPresenter;
+import com.team.dream.sleepsafe.herbergerconnection.HebergerConnectionActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class HebergerInformationActivity extends AppCompatActivity implements IHebergerInformationActivity {
 
@@ -60,16 +69,20 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
     String provider;
     FusedLocationProviderClient mFusedLocationClient;
 
+    private HebergerInformationActivityPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_heberger_information);
+        presenter = new HebergerInformationActivityPresenter(this, this);
 
         Intent i = getIntent();
         idPhone = i.getStringExtra("sinister");
 
         initView();
+
+        initListeners();
     }
 
     private void initView() {
@@ -93,10 +106,20 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
             }
         });
 
+    }
+
+
+    private void initListeners() {
         btnValidate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendHost();
+                presenter.sendHost(
+                        edtSipCode.getText().toString(),
+                        edtCity.getText().toString(),
+                        edtRoad.getText().toString(),
+                        edtPlaces.getText().toString(),
+                        edtMaxDistance.getText().toString(),
+                        chbTakeEm.getText().toString());
             }
         });
     }
@@ -113,7 +136,6 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
                         .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                //Prompt the user once explanation has been shown
                                 ActivityCompat.requestPermissions(HebergerInformationActivity.this,
                                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                                         3);
@@ -122,7 +144,6 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
                         .create()
                         .show();
             } else {
-                // No explanation needed, we can request the permission.
                 ActivityCompat.requestPermissions(this,
                         new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                         3);
@@ -170,88 +191,18 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
                 });
     }
 
-    private Boolean verifySinisterInformation() {
-        if (edtCity.getText().toString().equalsIgnoreCase("")) {
-            Toast.makeText(this, "Renseignez la ville", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        else if(edtMaxDistance.getText().toString().equalsIgnoreCase("")) {
-            Toast.makeText(this, "Renseignez la distance maximale de prise en charge", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        else if(edtRoad.getText().toString().equalsIgnoreCase("")) {
-            Toast.makeText(this, "Renseignez la rue", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        else if(edtSipCode.getText().toString().equalsIgnoreCase("")) {
-            Toast.makeText(this, "Renseignez un code postal", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        else if(edtPlaces.getText().toString().equalsIgnoreCase("")) {
-            Toast.makeText(this, "Renseignez le nombre de places disponibles", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-        else  {
-            return true;
-        }
+    @Override
+    public void errorFields(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+
     }
 
-    private void sendHost() {
-        if(verifySinisterInformation()){
-            JSONObject jsonObject = new JSONObject();
-            try {
-                if (chbTakeEm.isChecked()){
-                    jsonObject.put("distance", edtMaxDistance.getText().toString());
-                }
-                else {
-                    edtMaxDistance.setText("0");
-                    jsonObject.put("distance", "0");
-                }
-                SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("pref", Context.MODE_PRIVATE);
-                String id = sharedPreferences.getString("id_user", "1");
-                jsonObject.put("address_name", edtRoad.getText().toString());
-                jsonObject.put("address_zipcode", edtSipCode.getText().toString());
-                jsonObject.put("address_city", edtCity.getText().toString());
-                jsonObject.put("nb_bed", edtPlaces.getText().toString());
-                jsonObject.put("id_user", id);
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-            System.out.println(jsonObject.toString());
-            AndroidNetworking.post(BaseApplication.BASE_URL + "/host")
-                    .addJSONObjectBody(jsonObject)
-                    .build()
-                    .getAsJSONObject(new JSONObjectRequestListener() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Log.d("TAG", response.toString());
-
-                           /*
-                            try {
-                                String id = response.getString("id");
-                                sinisterHosting(id);
-
-                            } catch (JSONException e){
-                                e.printStackTrace();
-                            }*/
-                        }
-
-                        @Override
-                        public void onError(ANError anError) {
-                            System.out.print(anError);
-                        }
-                    });
-
-            // il faut placer ces deux ligne dans la réponse de l'api, si le logement a été ajouté en base
-            Toast.makeText(this, "Votre lieu d'ébergement a été ajouté", Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(HebergerInformationActivity.this, HebergerHomeActivity.class));
-
-        }
+    @Override
+    public void launchHome() {
+        startActivity(new Intent(HebergerInformationActivity.this, HebergerHomeActivity.class));
     }
 
-
-    private void sinisterHosting(String idHost) {
+    /*private void sinisterHosting(String idHost) {
 
         JSONObject jsonObject = new JSONObject();
 
@@ -281,7 +232,9 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
                         System.out.print(anError);
                     }
                 });
+
     }
+    */
 }
 
 

@@ -42,8 +42,7 @@ public class HebergerConnectionActivity extends AppCompatActivity implements IHe
         btnConnection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //presenter.connection(edtEmail.getText().toString(), edtPassword.getText().toString());
-                startActivity(new Intent(HebergerConnectionActivity.this, HebergerHomeActivity.class));
+                presenter.connection(edtEmail.getText().toString(), edtPassword.getText().toString());
             }
         });
 
@@ -63,8 +62,7 @@ public class HebergerConnectionActivity extends AppCompatActivity implements IHe
     }
 
     @Override
-    public void launchHebergerInfo() {
-        finishAndRemoveTask();
-        Toast.makeText(this, "Vous pouvez quitter l'application.", Toast.LENGTH_SHORT).show();
+    public void launchHome() {
+        startActivity(new Intent(HebergerConnectionActivity.this, HebergerHomeActivity.class));
     }
 }
