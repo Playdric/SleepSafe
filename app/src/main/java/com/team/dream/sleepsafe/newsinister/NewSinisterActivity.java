@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
@@ -27,6 +28,9 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.team.dream.sleepsafe.R;
+import com.team.dream.sleepsafe.hebergerhome.HebergerHomeActivity;
+import com.team.dream.sleepsafe.hebergerinformation.HebergerInformationActivity;
+import com.team.dream.sleepsafe.homescreen.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -183,6 +187,17 @@ public class NewSinisterActivity extends AppCompatActivity implements INewSinist
             }
         });
 
+    }
+
+    @Override
+    public void errorFields(String error) {
+        Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void launchHome() {
+        startActivity(new Intent(NewSinisterActivity.this, MainActivity.class));
     }
 
     private String getIdPhone() {
