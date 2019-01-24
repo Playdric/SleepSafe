@@ -61,6 +61,7 @@ public class HebergerConnectionActivityPresenter implements IHebergerConnectionA
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Log.d("tag", "signInWithEmail:success");
+                            BaseApplication.id_user = task.getResult().getUser().getUid();
                             view.launchHome();
                         } else {
                             view.errorFields("Une erreur est survenu lors de la connexion (authentification)");

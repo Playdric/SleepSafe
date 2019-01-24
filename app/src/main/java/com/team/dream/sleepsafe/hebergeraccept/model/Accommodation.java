@@ -9,13 +9,13 @@ public class Accommodation {
     private int id_user;
     private int bed_available;
 
-    public Accommodation(String address, String city, int zipcode, int nb_bed, int id_user, int bed_available) {
+    public Accommodation(String address, String city, int zipcode, int nb_bed/*, int id_user, int bed_available*/) {
         this.address = address;
         this.city = city;
         this.zipcode = zipcode;
         this.nb_bed = nb_bed;
-        this.id_user = id_user;
-        this.bed_available = bed_available;
+        /*this.id_user = id_user;
+        this.bed_available = bed_available;*/
     }
 
     public String getAddress() {

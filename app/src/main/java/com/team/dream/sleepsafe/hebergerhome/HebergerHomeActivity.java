@@ -1,22 +1,26 @@
 package com.team.dream.sleepsafe.hebergerhome;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.team.dream.sleepsafe.BaseApplication;
 import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.hebergeraccept.HebergerAcceptActivity;
 import com.team.dream.sleepsafe.hebergeraccept.adapter.AccommodationAdapter;
-import com.team.dream.sleepsafe.hebergeraccept.adapter.SinisterAdapter;
 import com.team.dream.sleepsafe.hebergeraccept.model.Accommodation;
-import com.team.dream.sleepsafe.hebergeraccept.model.Sinister;
 import com.team.dream.sleepsafe.hebergerinformation.HebergerInformationActivity;
 
 import java.util.ArrayList;
@@ -26,7 +30,7 @@ public class HebergerHomeActivity extends AppCompatActivity implements IHeberger
 
     RecyclerView items_view_accommodation;
 
-    private ArrayList<Sinister> accommodations = new ArrayList<>();
+    private ArrayList<Accommodation> accommodations = new ArrayList<Accommodation>();
     Button accommodationBtn;
     Button sinisterBtn;
 
@@ -35,15 +39,7 @@ public class HebergerHomeActivity extends AppCompatActivity implements IHeberger
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_heberger_home);
 
-        /// test
-        ArrayList<Accommodation> accommodations = new ArrayList<>();
-        accommodations.add(new Accommodation("13 bis rue keller", "paris", 75011, 3, 123, 2));
-        accommodations.add(new Accommodation("239 rue toto", "paris", 75013, 2, 1355, 3));
-        fillData(accommodations);
-
-        ////////////////////////
         initView();
-        initListener();
     }
 
 
@@ -74,9 +70,27 @@ public class HebergerHomeActivity extends AppCompatActivity implements IHeberger
     }
 
     private void initView() {
-
-        accommodationBtn = findViewById(R.id.btn_new_accommodation);
-        sinisterBtn = findViewById(R.id.btn_check_sinister);
-        items_view_accommodation = findViewById(R.id.items_view_accommodation);
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("accomodation")
+                .whereEqualTo("id_user", BaseApplication.id_user)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                accommodations.add(new Accommodation(document.getString("address_name"),document.getString("address_city"), Integer.parseInt(document.getString("address_zipcode")), Integer.parseInt(document.getString("nb_bed"))));
+                                Log.d("TAG", document.getId() + " => " + document.getData());
+                            }
+                            fillData(accommodations);
+                            accommodationBtn = findViewById(R.id.btn_new_accommodation);
+                            sinisterBtn = findViewById(R.id.btn_check_sinister);
+                            items_view_accommodation = findViewById(R.id.items_view_accommodation);
+                            initListener();
+                        } else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
 }

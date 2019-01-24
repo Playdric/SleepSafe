@@ -11,6 +11,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.team.dream.sleepsafe.BaseApplication;
 import com.team.dream.sleepsafe.hebergerinscription.IHebergerInscriptionActivity;
 
 import org.json.JSONException;
@@ -42,7 +43,7 @@ public class HebergerInformationActivityPresenter extends AppCompatActivity impl
             accomodation.put("address_zipcode", edtSipCode);
             accomodation.put("address_city", edtCity);
             accomodation.put("nb_bed", edtPlaces);
-            accomodation.put("id_user", id);
+            accomodation.put("id_user", BaseApplication.id_user);
 
             db.collection("accomodation")
                     .add(accomodation)
