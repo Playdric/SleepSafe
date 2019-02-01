@@ -40,6 +40,7 @@ public class HebergerConnectionActivityPresenter implements IHebergerConnectionA
     @Override
     public void connection(String email, String password) {
 
+        Log.d("tag", "aaaa");
         if(email.isEmpty() || password.isEmpty()) {
             view.errorFields("Remplis tous les champs");
             return ;

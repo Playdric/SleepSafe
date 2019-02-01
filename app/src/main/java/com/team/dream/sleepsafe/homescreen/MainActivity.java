@@ -1,23 +1,16 @@
 package com.team.dream.sleepsafe.homescreen;
 
 import android.content.Intent;
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 import com.team.dream.sleepsafe.R;
-import com.team.dream.sleepsafe.hebergerdispo.HebergerDispoActivity;
-import com.team.dream.sleepsafe.hebergerinformation.HebergerInformationActivity;
-import com.team.dream.sleepsafe.hebergeraccept.HebergerAcceptActivity;
-import com.team.dream.sleepsafe.hebergerinscription.HebergerInscriptionActivity;
-import com.team.dream.sleepsafe.hebergerreceived.HebergerReceivedActivity;
+import com.team.dream.sleepsafe.hebergerhome.HebergerHomeActivity;
 import com.team.dream.sleepsafe.herbergerconnection.HebergerConnectionActivity;
-import com.team.dream.sleepsafe.utils.MyFirebaseMessagingService;
 import com.team.dream.sleepsafe.newsinister.NewSinisterActivity;
+
 
 public class MainActivity extends AppCompatActivity implements IMainActivity{
 

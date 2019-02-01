@@ -71,5 +71,5 @@ public class HebergerInscriptionActivity extends AppCompatActivity implements IH
     @Override
     public void launchConnection() {
         startActivity(new Intent(HebergerInscriptionActivity.this, HebergerConnectionActivity.class));
-     }
+    }
 }

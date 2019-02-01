@@ -61,7 +61,7 @@ public class HebergerInscriptionActivityPresenter extends AppCompatActivity impl
 
                             FirebaseFirestore db = FirebaseFirestore.getInstance();
                             Map<String, Object> user = new HashMap<>();
-                            user.put("id_phone", phoneNumber);
+                            user.put("id_phone", fcmId);
                             user.put("id_user", task.getResult().getUser().getUid());
                             user.put("firstname", firstname);
                             user.put("lastname", lastname);

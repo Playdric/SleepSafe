@@ -201,40 +201,6 @@ public class HebergerInformationActivity extends AppCompatActivity implements IH
     public void launchHome() {
         startActivity(new Intent(HebergerInformationActivity.this, HebergerHomeActivity.class));
     }
-
-    /*private void sinisterHosting(String idHost) {
-
-        JSONObject jsonObject = new JSONObject();
-
-
-        try {
-            jsonObject.accumulate("id_phone", idPhone);
-            jsonObject.accumulate("id_host", idHost);
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Une erreur est survenue", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-
-        AndroidNetworking.put(BaseApplication.BASE_URL + "/sinister/hosting")
-                .addJSONObjectBody(jsonObject)
-                .build()
-                .getAsJSONObject(new JSONObjectRequestListener() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("TAG", response.toString());
-                        Toast.makeText(HebergerInformationActivity.this, "La personne a été prévenue, tu peux quitter, elle va vous appeler", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        System.out.print(anError);
-                    }
-                });
-
-    }
-    */
 }
 
 
