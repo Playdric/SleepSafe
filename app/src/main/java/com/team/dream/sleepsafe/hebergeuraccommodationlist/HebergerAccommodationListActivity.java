@@ -82,8 +82,8 @@ public class HebergerAccommodationListActivity extends AppCompatActivity impleme
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                accommodations.add(new Accommodation(document.getString("address_name"),document.getString("address_city"), Integer.parseInt(document.getString("address_zipcode")), Integer.parseInt(document.getString("nb_bed"))));
-                                Log.d("TAG", document.getId() + " => " + document.getData());
+                                accommodations.add(new Accommodation(document.getId(), document.getString("address_name"),document.getString("address_city"), Integer.parseInt(document.getString("address_zipcode")), Integer.parseInt(document.getString("nb_bed"))));
+                                Log.d("TAG ID ACCOMMODATION :", document.getId());
                             }
                             fillData(accommodations);
                             items_view_accommodation = findViewById(R.id.items_view_accommodation);

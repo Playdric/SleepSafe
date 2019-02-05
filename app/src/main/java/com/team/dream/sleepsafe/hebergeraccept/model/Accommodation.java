@@ -8,12 +8,14 @@ public class Accommodation {
     private int nb_bed;
     private int id_user;
     private int bed_available;
+    private String accommodationId;
 
-    public Accommodation(String address, String city, int zipcode, int nb_bed/*, int id_user, int bed_available*/) {
+    public Accommodation(String accommodationId, String address, String city, int zipcode, int nb_bed/*, int id_user, int bed_available*/) {
         this.address = address;
         this.city = city;
         this.zipcode = zipcode;
         this.nb_bed = nb_bed;
+        this.accommodationId = accommodationId;
         /*this.id_user = id_user;
         this.bed_available = bed_available;*/
     }
@@ -28,6 +30,14 @@ public class Accommodation {
 
     public String getCity() {
         return city;
+    }
+
+    public String getAccommodationId() {
+        return accommodationId;
+    }
+
+    public void setAccommodationId(String accommodationId) {
+        this.accommodationId = accommodationId;
     }
 
     public void setCity(String city) {

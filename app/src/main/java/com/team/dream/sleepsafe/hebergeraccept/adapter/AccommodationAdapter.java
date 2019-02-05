@@ -48,9 +48,7 @@ public class AccommodationAdapter extends RecyclerView.Adapter<AccommodationAdap
         holder.btnSeeMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //démmarrer l'activity HebergerAccommodationAtivity en lui envoyant accomodation
-                // -> accommodation
+                activity.doSmth(accommodation);
             }
         });
     }

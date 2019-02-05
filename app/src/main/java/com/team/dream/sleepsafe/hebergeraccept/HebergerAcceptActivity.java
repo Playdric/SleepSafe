@@ -24,6 +24,7 @@ import com.team.dream.sleepsafe.hebergeraccept.adapter.SinisterAdapter;
 import com.team.dream.sleepsafe.hebergeraccept.model.Accommodation;
 import com.team.dream.sleepsafe.hebergeraccept.model.Sinister;
 import com.team.dream.sleepsafe.hebergerinformation.HebergerInformationActivity;
+import com.team.dream.sleepsafe.hebergeuraccommodationlist.HebergerAccommodationListActivity;
 
 import org.json.JSONObject;
 
@@ -73,7 +74,7 @@ public class HebergerAcceptActivity extends AppCompatActivity  implements IHeber
                 .setPositiveButton("accepter", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent i=new Intent(HebergerAcceptActivity.this,HebergerInformationActivity.class);
+                        Intent i=new Intent(HebergerAcceptActivity.this,HebergerAccommodationListActivity.class);
                         i.putExtra("sinister", sinister.getIdPhone());
                         startActivity(i);
                     }

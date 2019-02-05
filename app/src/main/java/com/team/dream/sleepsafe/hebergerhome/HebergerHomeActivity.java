@@ -16,13 +16,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.protobuf.StringValue;
 import com.team.dream.sleepsafe.BaseApplication;
 import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.hebergeraccept.HebergerAcceptActivity;
 import com.team.dream.sleepsafe.hebergeraccept.adapter.AccommodationAdapter;
 import com.team.dream.sleepsafe.hebergeraccept.model.Accommodation;
+import com.team.dream.sleepsafe.hebergeraccomodation.HebergerAccommodationActivity;
 import com.team.dream.sleepsafe.hebergerinformation.HebergerInformationActivity;
+import com.team.dream.sleepsafe.hebergeuraccommodationlist.HebergerAccommodationListActivity;
 
+import java.io.Console;
 import java.util.ArrayList;
 
 
@@ -69,6 +73,19 @@ public class HebergerHomeActivity extends AppCompatActivity implements IHeberger
 
     }
 
+    public void doSmth(Accommodation accommodation) {
+
+
+        Intent i= new Intent(HebergerHomeActivity.this,HebergerAccommodationActivity.class);
+        i.putExtra("address",accommodation.getAddress());
+        i.putExtra("city",accommodation.getCity());
+        i.putExtra("zipcode",String.valueOf(accommodation.getZipcode()));
+        i.putExtra("nb_total_places",String.valueOf(accommodation.getNb_bed()));
+        i.putExtra("accommodationId",accommodation.getAccommodationId());
+
+        startActivity(i);
+    }
+
     private void initView() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("accomodation")
@@ -79,8 +96,7 @@ public class HebergerHomeActivity extends AppCompatActivity implements IHeberger
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                accommodations.add(new Accommodation(document.getString("address_name"),document.getString("address_city"), Integer.parseInt(document.getString("address_zipcode")), Integer.parseInt(document.getString("nb_bed"))));
-                                Log.d("TAG", document.getId() + " => " + document.getData());
+                                accommodations.add(new Accommodation(document.getId(), document.getString("address_name"),document.getString("address_city"), Integer.parseInt(document.getString("address_zipcode")), Integer.parseInt(document.getString("nb_bed"))));
                             }
                             fillData(accommodations);
                             accommodationBtn = findViewById(R.id.btn_new_accommodation);

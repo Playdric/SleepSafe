@@ -12,7 +12,7 @@
         android:layout_height="46dp"
         android:layout_margin="10dp"
         android:layout_marginBottom="8dp"
-        android:hint="Ville"
+        android:hint="Adresse"
         android:inputType="text"
         android:scrollbars="vertical"
         android:theme="@style/MyEditText"
@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:hint="Adresse"
+        android:hint="Zip code"
         android:inputType="text"
         android:scrollbars="vertical"
         android:theme="@style/MyEditText"
@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:layout_marginBottom="8dp"
-        android:hint="Zip code"
+        android:hint="Ville"
         android:inputType="text"
         android:scrollbars="vertical"
         android:theme="@style/MyEditText"
@@ -104,12 +104,13 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="8dp"
         android:text="Nombre de places total :"
         app:layout_constraintEnd_toStartOf="@+id/tdt_nbplaces"
-        app:layout_constraintHorizontal_bias="0.17"
+        app:layout_constraintHorizontal_bias="0.205"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="292dp" />
+        app:layout_constraintTop_toBottomOf="@+id/tdt_city" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -126,11 +127,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:text="Retour"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_confirm"
         app:layout_constraintHorizontal_bias="0.712"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="433dp"
         tools:ignore="MissingConstraints" />
 
     <Button
@@ -138,9 +140,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="64dp"
+        android:layout_marginBottom="8dp"
         android:text="Modifier"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="433dp"
         tools:ignore="MissingConstraints" />
 
 </android.support.constraint.ConstraintLayout>
