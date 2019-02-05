@@ -18,7 +18,7 @@
 
     <EditText
         android:id="@+id/InputMessage"
-        android:layout_width="306dp"
+        android:layout_width="290dp"
         android:layout_height="63dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
@@ -27,17 +27,13 @@
         android:ems="10"
         android:inputType="textMultiLine" />
 
-    <TextView
-        android:id="@+id/TextView"
-        android:layout_width="156dp"
-        android:layout_height="32dp"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/chat"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="34dp"
-        android:layout_marginEnd="193dp"
-        android:layout_marginBottom="445dp"
-        android:text="TextView" />
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp" />
+
 </RelativeLayout>
