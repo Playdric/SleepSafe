@@ -1,7 +1,6 @@
 package com.team.dream.sleepsafe.chatApplication;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -22,17 +21,11 @@ import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.team.dream.sleepsafe.R;
 
 
@@ -40,10 +33,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ChatApplicationActivity extends AppCompatActivity {
 
@@ -78,10 +70,82 @@ public class ChatApplicationActivity extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
 
+        initView();
+        initListener();
+
+        getPreviousMessage();
+    }
+
+    private void initListener() {
+        sendBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                submitMessageToBDD();
+            }
+        });
+    }
+
+    private void initView() {
+        sendBtn = findViewById(R.id.ButtonSend);
+        inputMsg = findViewById(R.id.InputMessage);
+    }
+
+    private void submitMessageToBDD() {
+        try {
+            String url = urlLocal + "chat/post";
+            JSONObject jsonBody = new JSONObject();
+            jsonBody.put("userID", "1");
+            jsonBody.put("message", inputMsg.getText().toString());
+            jsonBody.put("timestamp", "2847298");
+
+            final String mRequestBody = jsonBody.toString();
+
+            StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject toto = new JSONObject(response);
+                        Chat chat = new Chat(toto);
+                        chatList.add(chat);
+                        mAdapter.notifyDataSetChanged();
+                    } catch (Exception e) {
+                        Log.e(TAG, e.getMessage());
+                    }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.e(TAG, error.getMessage());
+                }
+            }) {
+                @Override
+                public String getBodyContentType() {
+                    return "application/json; charset=utf-8";
+                }
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    try {
+                        return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
+                    } catch (UnsupportedEncodingException uee) {
+                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", mRequestBody, "utf-8");
+                        return null;
+                    }
+                }
+            };
+
+            RequestQueue requestQueue = Volley.newRequestQueue(ChatApplicationActivity.this);
+
+            requestQueue.add(jsonObjectRequest);
+            mAdapter.notifyDataSetChanged();
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
+        }
+    }
+
+    private void getPreviousMessage() {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, urlLocal + "chat/array", null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Log.d(TAG, response.toString());
                 for(int i = 0; i < response.length(); i++){
                     try {
                         JSONObject jsonObject = response.getJSONObject(i);
@@ -101,23 +165,19 @@ public class ChatApplicationActivity extends AppCompatActivity {
                             "error_network_timeout",
                             Toast.LENGTH_LONG).show();
                 } else if (error instanceof AuthFailureError) {
-                    //TODO
                     Toast.makeText(ChatApplicationActivity.this,
                             "AuthFailureError",
                             Toast.LENGTH_LONG).show();
                 } else if (error instanceof ServerError) {
-                    //TODO
                     Log.e(TAG, "ERROR : "+ Integer.toString(error.networkResponse.statusCode) + " " + error.getMessage());
                     Toast.makeText(ChatApplicationActivity.this,
                             "ServerError",
                             Toast.LENGTH_LONG).show();
                 } else if (error instanceof NetworkError) {
-                    //TODO
                     Toast.makeText(ChatApplicationActivity.this,
                             "NetworkError",
                             Toast.LENGTH_LONG).show();
                 } else if (error instanceof ParseError) {
-                    //TODO
                     Toast.makeText(ChatApplicationActivity.this,
                             "ParseError",
                             Toast.LENGTH_LONG).show();
@@ -125,72 +185,7 @@ public class ChatApplicationActivity extends AppCompatActivity {
             }
         });
 
-        initView();
-        initListener();
-        getMessages();
         queue.add(jsonArrayRequest);
-    }
-
-    private void initListener() {
-        sendBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onSubmitMessage();
-            }
-        });
-    }
-
-    private void initView() {
-        sendBtn = findViewById(R.id.ButtonSend);
-        inputMsg = findViewById(R.id.InputMessage);
-    }
-
-    private void onSubmitMessage() {
-        Map<String, Object> user = new HashMap<>();
-        user.put("first", "Ada");
-        user.put("last", "Lovelace");
-        user.put("born", 1815);
-
-        db.collection("chat")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(ChatApplicationActivity.this, "User sended.",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(ChatApplicationActivity.this, "Error user sended.",
-                                Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    private void getMessages() {
-        CollectionReference colRef = db.collection("chat");
-
-        colRef.addSnapshotListener(new EventListener<QuerySnapshot>() {
-            @Override
-            public void onEvent(@javax.annotation.Nullable QuerySnapshot queryDocumentSnapshots, @javax.annotation.Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    Log.w(TAG, "Listen failed.", e);
-                    return;
-                }
-
-                List<String> cities = new ArrayList<>();
-                for (QueryDocumentSnapshot doc : queryDocumentSnapshots) {
-                    if (doc.get("message") != null) {
-                        String msg = doc.getString("message");
-                        Log.d(TAG, msg);
-                        cities.add(msg);
-                    }
-                }
-            }
-        });
-
     }
 
 }

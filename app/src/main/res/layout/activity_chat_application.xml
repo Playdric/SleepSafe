@@ -9,11 +9,11 @@
     <Button
         android:id="@+id/ButtonSend"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="61dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="0dp"
-        android:layout_marginBottom="1dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="4dp"
         android:text="Send" />
 
     <EditText
@@ -22,7 +22,7 @@
         android:layout_height="63dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginStart="0dp"
+        android:layout_marginStart="5dp"
         android:layout_marginBottom="0dp"
         android:ems="10"
         android:inputType="textMultiLine" />
@@ -30,7 +30,7 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/chat"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="435dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
