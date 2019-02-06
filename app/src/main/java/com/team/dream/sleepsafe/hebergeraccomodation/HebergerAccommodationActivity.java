@@ -62,7 +62,8 @@ public class HebergerAccommodationActivity extends AppCompatActivity implements 
 
     public void doSmth(Sinister sinister) {
 
-        // il faut supprimer le sinister du logement
+        // il faut supprimer le sinister du logement en bdd
+
     }
 
     public void fillData(ArrayList<Sinister> sinisters) {
@@ -94,6 +95,7 @@ public class HebergerAccommodationActivity extends AppCompatActivity implements 
 
         // recup sinisters liée au logement via accommodationId et les ajoutés au tableau sinisters
         sinisters.add(new Sinister("paul","finet",223344, 22,"test comment", "test location","éez"));
+        sinisters.add(new Sinister("toto","tutu",223344, 22,"test comment", "test location","éez"));
 
 
 

@@ -44,26 +44,26 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/items_view_accommodation"
-        android:layout_width="368dp"
-        android:layout_height="111dp"
+        android:layout_width="346dp"
+        android:layout_height="265dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_new_accommodation"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_new_accommodation"
         android:layout_width="wrap_content"
-        android:layout_height="64dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="52dp"
         android:text="Ajouter un hébergement"
         app:layout_constraintBottom_toTopOf="@+id/btn_check_sinister"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -72,7 +72,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="28dp"
         android:text="Consulter la demande de sinistré(s)"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

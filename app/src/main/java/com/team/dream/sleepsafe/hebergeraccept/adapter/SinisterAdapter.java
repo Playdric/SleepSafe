@@ -40,7 +40,7 @@ public class SinisterAdapter extends RecyclerView.Adapter<SinisterAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final Sinister sinister = sinisters.get(position);
-        holder.name.setText(sinister.getSurname() + " " + sinister.getName());
+        //holder.name.setText(sinister.getSurname() + " " + sinister.getName());
         holder.nbPeople.setText(activity.getApplicationContext().getString(R.string.nb_people, sinister.getNbPeople()));
         holder.btnSeeMore.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -23,7 +23,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.727" />
+        app:layout_constraintVertical_bias="0.932" />
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_stricken"
@@ -31,9 +31,24 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="80dp"
         android:layout_marginRight="80dp"
-        android:layout_marginBottom="100dp"
+        android:layout_marginBottom="140dp"
         android:fontFamily="casual"
         android:text="Sinistré"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_msg"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/btn_msg"
+        android:layout_width="match_parent"
+        android:layout_height="49dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginBottom="48dp"
+        android:fontFamily="casual"
+        android:text="Messagerie"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

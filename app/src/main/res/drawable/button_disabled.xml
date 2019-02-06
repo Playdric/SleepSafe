@@ -7,9 +7,9 @@
         android:endColor="@color/secondary_text"
         android:angle="90"/>
     <padding android:left="7dp"
-        android:top="7dp"
-        android:right="7dp"
-        android:bottom="7dp" />
-    <corners android:radius= "12dp" />
+        android:top="4dp"
+        android:right="4dp"
+        android:bottom="4dp" />
+    <corners android:radius= "8dp" />
 
 </shape>

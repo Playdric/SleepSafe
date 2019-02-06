@@ -69,9 +69,9 @@ public class HebergerAcceptActivity extends AppCompatActivity  implements IHeber
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.Theme_AppCompat_Light_Dialog))
                 .setTitle("details")
-                .setMessage("Sinistré : " + sinister.getSurname() + " " + sinister.getName() + "\n\n Téléphone :  " + String.valueOf(sinister.getPhoneNumber()) + "\n\n Commentaire :  " + sinister.getComment())
+                .setMessage("Sinistré : " + sinister.getSurname() + " " + sinister.getName() + "\n\nTéléphone :  " + String.valueOf(sinister.getPhoneNumber()) + "\n\nNombre de personne(s) :  " + sinister.getNbPeople() + "\n\nCommentaire :  " + sinister.getComment())
 
-                .setPositiveButton("accepter", new DialogInterface.OnClickListener() {
+                .setPositiveButton("Affecter", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent i=new Intent(HebergerAcceptActivity.this,HebergerAccommodationListActivity.class);
@@ -79,7 +79,7 @@ public class HebergerAcceptActivity extends AppCompatActivity  implements IHeber
                         startActivity(i);
                     }
                 })
-                .setNegativeButton("non", new DialogInterface.OnClickListener() {
+                .setNegativeButton("Retour", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 

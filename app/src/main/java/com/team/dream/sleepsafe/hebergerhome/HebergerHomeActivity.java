@@ -37,6 +37,7 @@ public class HebergerHomeActivity extends AppCompatActivity implements IHeberger
     private ArrayList<Accommodation> accommodations = new ArrayList<Accommodation>();
     Button accommodationBtn;
     Button sinisterBtn;
+    Button msgBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +69,12 @@ public class HebergerHomeActivity extends AppCompatActivity implements IHeberger
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HebergerHomeActivity.this, HebergerAcceptActivity.class));
+            }
+        });
+        msgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //startActivity(new Intent(HebergerHomeActivity.this, MessagingActivity.class));
             }
         });
 

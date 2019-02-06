@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -9,20 +11,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/primary_text"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:maxLines="1"
-        app:layout_constraintRight_toLeftOf="@id/btn_accept"
-        app:layout_constraintTop_toBottomOf="@id/txv_name"/>
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"/>
 
     <TextView
         android:id="@+id/txv_zipcode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/primary_text"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:maxLines="1"
-        app:layout_constraintRight_toLeftOf="@id/btn_accept"
-        app:layout_constraintTop_toBottomOf="@id/txv_name"/>
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintRight_toLeftOf="@id/btn_accept" />
 
     <Button
         android:id="@+id/btn_accept"

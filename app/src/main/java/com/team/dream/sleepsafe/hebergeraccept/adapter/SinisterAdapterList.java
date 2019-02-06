@@ -36,14 +36,14 @@ public class SinisterAdapterList extends RecyclerView.Adapter<SinisterAdapterLis
     }
 
     @Override
-    public void onBindViewHolder(@NonNull  SinisterAdapterList.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull  SinisterAdapterList.MyViewHolder holder, final int position) {
         final Sinister sinister = sinisters.get(position);
         holder.name.setText(sinister.getSurname() + " " + sinister.getName());
-        holder.nbPeople.setText(activity.getApplicationContext().getString(R.string.nb_people, sinister.getNbPeople()));
         holder.btnSeeMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 activity.doSmth(sinister);
+                delete(position);
             }
         });
     }
@@ -54,16 +54,21 @@ public class SinisterAdapterList extends RecyclerView.Adapter<SinisterAdapterLis
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView name, nbPeople;
+        public TextView name;
         public Button btnSeeMore;
 
         public MyViewHolder(View view) {
             super(view);
             name = view.findViewById(R.id.txv_name);
-            nbPeople = view.findViewById(R.id.txv_people);
             btnSeeMore = view.findViewById(R.id.btn_accept);
             btnSeeMore.setText("supprimer");
 
         }
     }
+
+    public void delete(int position) { //removes the row
+        sinisters.remove(position);
+        notifyItemRemoved(position);
+    }
+
 }
