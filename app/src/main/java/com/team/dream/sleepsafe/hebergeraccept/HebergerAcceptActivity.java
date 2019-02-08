@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -47,8 +48,6 @@ public class HebergerAcceptActivity extends AppCompatActivity  implements IHeber
 
         presenter = new HebergerAcceptActivityPresenter(this, this);
 
-        presenter.getData();
-
         presenter = new HebergerAcceptActivityPresenter(this, this);
 
         /// test
@@ -74,8 +73,8 @@ public class HebergerAcceptActivity extends AppCompatActivity  implements IHeber
                 .setPositiveButton("Affecter", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Intent i=new Intent(HebergerAcceptActivity.this,HebergerAccommodationListActivity.class);
-                        i.putExtra("sinister", sinister.getIdPhone());
+                        Intent i = new Intent(HebergerAcceptActivity.this,HebergerAccommodationListActivity.class);
+                        i.putExtra("sinister", sinister.getId());
                         startActivity(i);
                     }
                 })
@@ -92,37 +91,6 @@ public class HebergerAcceptActivity extends AppCompatActivity  implements IHeber
     }
 
     private void initView() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("sinister")
-                .whereEqualTo("status", 0)
-                .get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.d("firstname", document.getString("firstname"));
-                                Log.d("lastname", document.getString("lastname"));
-                                Log.d("phone_number", document.getLong("phone_number").toString());
-                                Log.d("nb_people", document.getLong("nb_people").toString());
-                                Log.d("comment", document.getString("comment"));
-                                Log.d("localisation", document.getString("localisation"));
-                                Log.d("id_phone", document.getString("id_phone"));
-
-                                sinisters.add(new Sinister(document.getString("firstname"),document.getString("lastname"), document.getLong("phone_number").intValue(), document.getLong("nb_people").intValue(),document.getString("comment"),document.getString("localisation"),document.getString("id_phone")));
-                                Log.d("TAG", document.getId() + " => " + document.getData());
-                            }
-                            fillData(sinisters);
-                            /*
-                            accommodationBtn = findViewById(R.id.btn_new_accommodation);
-                            sinisterBtn = findViewById(R.id.btn_check_sinister);
-                            items_view_accommodation = findViewById(R.id.items_view_accommodation);
-                            initListener();
-                            */
-                        } else {
-                            Log.d("TAG", "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+        presenter.getData();
     }
 }

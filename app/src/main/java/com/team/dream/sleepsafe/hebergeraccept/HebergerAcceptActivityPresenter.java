@@ -1,12 +1,20 @@
 package com.team.dream.sleepsafe.hebergeraccept;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONArrayRequestListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.team.dream.sleepsafe.BaseApplication;
+import com.team.dream.sleepsafe.R;
+import com.team.dream.sleepsafe.hebergeraccept.model.Accommodation;
 import com.team.dream.sleepsafe.hebergeraccept.model.Sinister;
 import com.team.dream.sleepsafe.hebergerinformation.IHebergerInformationActivity;
 import com.team.dream.sleepsafe.hebergerinformation.IHebergerInformationActivityPresenter;
@@ -29,27 +37,26 @@ public class HebergerAcceptActivityPresenter implements IHebergerAcceptActivityP
 
     @Override
     public void getData() {
-        AndroidNetworking.get(BaseApplication.BASE_URL + "/sinister/current")
-                .build()
-                .getAsJSONArray(new JSONArrayRequestListener() {
-                    @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            ArrayList<Sinister> sinisters = new ArrayList<>();
-                            // do anything with response
-                            for (int i = 0; i < response.length(); i++) {
-                                JSONObject o = response.getJSONObject(i);
-                                sinisters.add(new Sinister(o.getString("name"), o.getString("surname"), o.getInt("phoneNumber"), o.getInt("nb_people"), o.getString("comment"), o.getString("localisation"), o.getString("id_phone")));
-                            }
 
-                            view.fillData(sinisters);
-                        } catch(Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("sinister")
+                .whereEqualTo("status", 0)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onError(ANError error) {
-                        // handle error
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            ArrayList<Sinister> sinisters = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                sinisters.add(new Sinister(document.getId(), document.getString("firstname"), document.getString("lastname"), document.getLong("phone_number").intValue(), document.getLong("nb_people").intValue(), document.getString("comment"), document.getString("localisation"), document.getString("id_phone")));
+                                Log.d("TAG ID ACCOMMODATION :", document.getId());
+                            }
+                            Log.d("c", "c");
+                            view.fillData(sinisters);
+                        } else {
+                            Log.d("TAG", "Error getting documents: ", task.getException());
+                        }
                     }
                 });
     }

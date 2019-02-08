@@ -3,12 +3,15 @@ package com.team.dream.sleepsafe.hebergeraccept.adapter;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.hebergeraccept.HebergerAcceptActivity;
 import com.team.dream.sleepsafe.hebergeraccept.model.Accommodation;
@@ -49,11 +52,12 @@ public class AccommodationAdapterList extends RecyclerView.Adapter<Accommodation
         holder.btnSeeMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                // affecter le logement sur lequel on à cliqué
-
-
-
+                Log.d("sinister.getId()", activity.getIntent().getExtras().getString("sinister"));
+                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                DocumentReference sinister = db.collection("sinister")
+                        .document(activity.getIntent().getExtras().getString("sinister"));
+                sinister.update("status",1);
+                sinister.update("id_accomodation",accommodation.getAccommodationId());
                 activity.doSmth();
             }
         });

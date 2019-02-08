@@ -71,13 +71,13 @@ public class HebergerHomeActivity extends AppCompatActivity implements IHeberger
                 startActivity(new Intent(HebergerHomeActivity.this, HebergerAcceptActivity.class));
             }
         });
-        msgBtn.setOnClickListener(new View.OnClickListener() {
+        /*msgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //startActivity(new Intent(HebergerHomeActivity.this, MessagingActivity.class));
             }
         });
-
+*/
     }
 
     public void doSmth(Accommodation accommodation) {

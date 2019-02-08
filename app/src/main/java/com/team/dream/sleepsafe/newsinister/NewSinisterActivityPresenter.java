@@ -45,6 +45,7 @@ public class NewSinisterActivityPresenter implements INewSinisterActivityPresent
         sinister.put("localisation", localisation);
         sinister.put("id_phone", id_phone);
         sinister.put("status", 0);
+        sinister.put("id_accomodation", "");
         Log.d("TAG", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
         db.collection("sinister")
