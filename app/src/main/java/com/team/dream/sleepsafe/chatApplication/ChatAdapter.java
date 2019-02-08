@@ -44,7 +44,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
     public void onBindViewHolder(@NonNull ChatAdapter.MyViewHolder holder, int position) {
         Chat chat = chatList.get(position);
         try {
-            Log.d(TAG, "OK :" + chat.getDate());
             holder.pseudo.setText(chat.getPseudo());
             holder.message.setText(chat.getMessage());
             holder.date.setText(chat.getDate());

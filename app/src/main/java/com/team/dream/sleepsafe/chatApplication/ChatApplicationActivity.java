@@ -1,6 +1,7 @@
 package com.team.dream.sleepsafe.chatApplication;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,33 +10,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.NetworkError;
-import com.android.volley.NoConnectionError;
-import com.android.volley.ParseError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.ServerError;
-import com.android.volley.TimeoutError;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.team.dream.sleepsafe.R;
 
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChatApplicationActivity extends AppCompatActivity {
 
@@ -46,8 +35,6 @@ public class ChatApplicationActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private RequestQueue queue;
-    private String urlLocal = "http://10.33.254.152:3002/";
     private List<Chat> chatList = new ArrayList<>();
 
     @Override
@@ -55,7 +42,6 @@ public class ChatApplicationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_application);
         mRecyclerView = (RecyclerView) findViewById(R.id.chat);
-        queue = Volley.newRequestQueue(this);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -73,14 +59,34 @@ public class ChatApplicationActivity extends AppCompatActivity {
         initView();
         initListener();
 
-        getPreviousMessage();
+        createNewChannel();
+
+        Map<String, Object> user = new HashMap<>();
+        user.put("first", "Ada");
+        user.put("last", "Lovelace");
+        user.put("born", 1815);
+
+// Add a new document with a generated ID
+        db.collection("users")
+                .add(user)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e(TAG, "Error adding document", e);
+                    }
+                });
     }
 
     private void initListener() {
         sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                submitMessageToBDD();
             }
         });
     }
@@ -90,102 +96,56 @@ public class ChatApplicationActivity extends AppCompatActivity {
         inputMsg = findViewById(R.id.InputMessage);
     }
 
-    private void submitMessageToBDD() {
-        try {
-            String url = urlLocal + "chat/post";
-            JSONObject jsonBody = new JSONObject();
-            jsonBody.put("userID", "1");
-            jsonBody.put("message", inputMsg.getText().toString());
-            jsonBody.put("timestamp", "2847298");
+    private void createNewChannel() {
+        Log.d(TAG, "Im here");
+        // Channel channel = new Channel();
+        City city = new City("Los Angeles", "CA", "USA",
+                false, 5000000L, Arrays.asList("west_coast", "sorcal"));
+        /*User user1 = new User(1, "user1", "user1@gmail.com");
+        User user2 = new User(2, "user2", "user2@gmail.com");
 
-            final String mRequestBody = jsonBody.toString();
 
-            StringRequest jsonObjectRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        JSONObject toto = new JSONObject(response);
-                        Chat chat = new Chat(toto);
-                        chatList.add(chat);
-                        mAdapter.notifyDataSetChanged();
-                    } catch (Exception e) {
-                        Log.e(TAG, e.getMessage());
-                    }
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Log.e(TAG, error.getMessage());
-                }
-            }) {
-                @Override
-                public String getBodyContentType() {
-                    return "application/json; charset=utf-8";
-                }
-                @Override
-                public byte[] getBody() throws AuthFailureError {
-                    try {
-                        return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
-                    } catch (UnsupportedEncodingException uee) {
-                        VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", mRequestBody, "utf-8");
-                        return null;
-                    }
-                }
-            };
+        List<Number> userId = Arrays.asList(user1.getId(), user2.getId());
+        channel.setUserId(userId);
 
-            RequestQueue requestQueue = Volley.newRequestQueue(ChatApplicationActivity.this);
+        Messages message1 = new Messages(user1, user2, "Salut !");
+        channel.newMessage(message1);*/
 
-            requestQueue.add(jsonObjectRequest);
-            mAdapter.notifyDataSetChanged();
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
-        }
+        db.collection("chat").document("message3")
+            .set(city)
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w(TAG, "Error writing document", e);
+                }
+            });
     }
 
-    private void getPreviousMessage() {
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, urlLocal + "chat/array", null, new Response.Listener<JSONArray>() {
-            @Override
-            public void onResponse(JSONArray response) {
-                for(int i = 0; i < response.length(); i++){
-                    try {
-                        JSONObject jsonObject = response.getJSONObject(i);
-                        Chat chat = new Chat(jsonObject);
-                        chatList.add(chat);
-                        mAdapter.notifyDataSetChanged();
-                    } catch (JSONException e) {
-                        Log.e(TAG, e.getMessage());
+    private void getDocument() {
+
+        db.collection("chat").document("D4NRHtMsa8VI9e7qHncz")
+            .get()
+            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
                     }
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                if (error instanceof TimeoutError || error instanceof NoConnectionError) {
-                    Toast.makeText(ChatApplicationActivity.this,
-                            "error_network_timeout",
-                            Toast.LENGTH_LONG).show();
-                } else if (error instanceof AuthFailureError) {
-                    Toast.makeText(ChatApplicationActivity.this,
-                            "AuthFailureError",
-                            Toast.LENGTH_LONG).show();
-                } else if (error instanceof ServerError) {
-                    Log.e(TAG, "ERROR : "+ Integer.toString(error.networkResponse.statusCode) + " " + error.getMessage());
-                    Toast.makeText(ChatApplicationActivity.this,
-                            "ServerError",
-                            Toast.LENGTH_LONG).show();
-                } else if (error instanceof NetworkError) {
-                    Toast.makeText(ChatApplicationActivity.this,
-                            "NetworkError",
-                            Toast.LENGTH_LONG).show();
-                } else if (error instanceof ParseError) {
-                    Toast.makeText(ChatApplicationActivity.this,
-                            "ParseError",
-                            Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-
-        queue.add(jsonArrayRequest);
+            });
     }
 
 }

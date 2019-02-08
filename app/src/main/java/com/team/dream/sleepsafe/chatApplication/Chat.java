@@ -9,20 +9,13 @@ public class Chat {
     private String pseudo, message, date;
     final private String TAG = "Chat_Context";
 
-    public Chat(){}
-
-    public Chat(String pseudo, String message, String date) {
-        this.pseudo = pseudo;
-        this.message = message;
-        this.date = date;
-    }
-
     public Chat(JSONObject chat) {
         try {
             this.pseudo = chat.getString("userID");
             this.message = chat.getString("message");
-            this.date = chat.getString("timestamp");
-            Log.d(TAG, this.pseudo);
+            String timestamp = chat.getString("timestamp");
+            TimestampToDate date = new TimestampToDate(timestamp);
+            this.date = date.getDate();
         } catch (JSONException e) {
             Log.e(TAG, e.getMessage());
         }
