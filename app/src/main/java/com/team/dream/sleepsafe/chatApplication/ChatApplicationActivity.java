@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.team.dream.sleepsafe.R;
 
 import java.util.ArrayList;
@@ -60,27 +62,7 @@ public class ChatApplicationActivity extends AppCompatActivity {
         initListener();
 
         createNewChannel();
-
-        Map<String, Object> user = new HashMap<>();
-        user.put("first", "Ada");
-        user.put("last", "Lovelace");
-        user.put("born", 1815);
-
-// Add a new document with a generated ID
-        db.collection("users")
-                .add(user)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e(TAG, "Error adding document", e);
-                    }
-                });
+        getDocument();
     }
 
     private void initListener() {
@@ -97,11 +79,8 @@ public class ChatApplicationActivity extends AppCompatActivity {
     }
 
     private void createNewChannel() {
-        Log.d(TAG, "Im here");
-        // Channel channel = new Channel();
-        City city = new City("Los Angeles", "CA", "USA",
-                false, 5000000L, Arrays.asList("west_coast", "sorcal"));
-        /*User user1 = new User(1, "user1", "user1@gmail.com");
+        Channel channel = new Channel();
+        User user1 = new User(1, "user1", "user1@gmail.com");
         User user2 = new User(2, "user2", "user2@gmail.com");
 
 
@@ -109,10 +88,11 @@ public class ChatApplicationActivity extends AppCompatActivity {
         channel.setUserId(userId);
 
         Messages message1 = new Messages(user1, user2, "Salut !");
-        channel.newMessage(message1);*/
+        message1.setTimestamp("test");
+        channel.newMessage(message1);
 
         db.collection("chat").document("message3")
-            .set(city)
+            .set(channel)
             .addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
@@ -129,21 +109,23 @@ public class ChatApplicationActivity extends AppCompatActivity {
 
     private void getDocument() {
 
-        db.collection("chat").document("D4NRHtMsa8VI9e7qHncz")
+        db.collection("chat")
+            .whereArrayContains("userId", 1)
             .get()
-            .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                 @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            Log.d(TAG, "DocumentSnapshot data: " + document.getData());
-                        } else {
-                            Log.d(TAG, "No such document");
-                        }
-                    } else {
-                        Log.d(TAG, "get failed with ", task.getException());
+                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                    for (QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots) {
+                        Map<String, Object> data = queryDocumentSnapshot.getData();
+
+                        Log.d(TAG, data.toString());
                     }
+                }
+            })
+            .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.w(TAG, "Error writing document", e);
                 }
             });
     }

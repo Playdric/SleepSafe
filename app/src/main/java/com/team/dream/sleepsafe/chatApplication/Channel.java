@@ -1,5 +1,6 @@
 package com.team.dream.sleepsafe.chatApplication;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -47,7 +48,7 @@ class City {
 
 public class Channel {
     private List<Number> userId;
-    private List<Messages> messages;
+    private List<Messages> messages = new ArrayList<>();
 
     public Channel() { }
 
@@ -81,18 +82,19 @@ class Messages {
     public Messages() { }
 
     public Messages(User from, User to, String content) {
-        this.from = from.id;
-        this.to = to.id;
+        this.from = from.getId();
+        this.to = to.getId();
         this.content = content;
-    }
-
-    public void setFrom(Number from) {
-        this.from = from;
     }
 
     public void setTo(Number to) {
         this.to = to;
     }
+
+    public Number getTo() {
+        return to;
+    }
+
 
     public Number getFrom() {
         return from;
@@ -100,14 +102,6 @@ class Messages {
 
     public void setFrom(User from) {
         this.from = from.id;
-    }
-
-    public Number getTo() {
-        return to;
-    }
-
-    public void setTo(User to) {
-        this.to = to.id;
     }
 
     public String getContent() {
