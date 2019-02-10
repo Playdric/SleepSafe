@@ -47,77 +47,29 @@ class City {
 }
 
 public class Channel {
-    private List<Number> userId;
-    private List<Messages> messages = new ArrayList<>();
+    private Object userId;
+    private List<Object> messages;
 
     public Channel() { }
 
-    public void setMessages(List<Messages> messages) {
+    public Channel(Object id) {
+        id = this.userId;
+    }
+
+    public void setMessages(List<Object> messages) {
         this.messages = messages;
     }
 
-    public List<Number> getUserId() {
+    public Object getUserId() {
         return userId;
     }
 
-    public void setUserId(List<Number> userId) {
+    public void setUserId(Object userId) {
         this.userId = userId;
     }
 
-    public List<Messages> getMessages() {
+    public List<Object> getMessages() {
         return messages;
-    }
-
-    public void newMessage(Messages message) {
-        this.messages.add(message);
-    }
-}
-
-class Messages {
-    private Number from;
-    private Number to;
-    private String content;
-    private String timestamp;
-
-    public Messages() { }
-
-    public Messages(User from, User to, String content) {
-        this.from = from.getId();
-        this.to = to.getId();
-        this.content = content;
-    }
-
-    public void setTo(Number to) {
-        this.to = to;
-    }
-
-    public Number getTo() {
-        return to;
-    }
-
-
-    public Number getFrom() {
-        return from;
-    }
-
-    public void setFrom(User from) {
-        this.from = from.id;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
     }
 }
 
@@ -128,43 +80,5 @@ class IsView {
     public IsView(String userId, HashMap view) {
         this.userId = userId;
         this.view = new HashMap(2);
-    }
-}
-
-class User {
-    Number id;
-    String pseudo;
-    String email;
-
-    public User() { }
-
-    public User(Number id, String pseudo, String email) {
-        this.id = id;
-        this.pseudo = pseudo;
-        this.email = email;
-    }
-
-    public Number getId() {
-        return id;
-    }
-
-    public void setId(Number id) {
-        this.id = id;
-    }
-
-    public String getPseudo() {
-        return pseudo;
-    }
-
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }

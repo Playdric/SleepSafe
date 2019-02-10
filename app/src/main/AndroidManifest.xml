@@ -61,6 +61,7 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/accent" />
         <activity android:name=".newsinister.NewSinisterActivity" />
+        <activity android:name=".messagerie.MessagerieActivity" />
         <activity android:name=".chatApplication.ChatApplicationActivity" />
     </application>
 

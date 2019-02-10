@@ -7,13 +7,10 @@ import java.util.Date;
 
 public class TimestampToDate {
 
-    private String timestamp;
-
-    public TimestampToDate(String timestamp) {
-        this.timestamp = timestamp;
+    public TimestampToDate() {
     }
 
-    public String getDate() {
+    public String getDate(String timestamp) {
         Timestamp ts = new Timestamp(Long.parseLong(timestamp));
         Date date = new Date(ts.getTime());
         DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");

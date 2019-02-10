@@ -13,9 +13,6 @@ public class Chat {
         try {
             this.pseudo = chat.getString("userID");
             this.message = chat.getString("message");
-            String timestamp = chat.getString("timestamp");
-            TimestampToDate date = new TimestampToDate(timestamp);
-            this.date = date.getDate();
         } catch (JSONException e) {
             Log.e(TAG, e.getMessage());
         }

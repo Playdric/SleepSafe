@@ -3,4 +3,8 @@
     <string name="default_notification_channel_id">bonjour</string>
 
     <string name="nb_people">Nombre de personnes : %d</string>
+    <string name="btn_msg">Messagerie</string>
+    <string name="btn_stricken">Sinistré</string>
+    <string name="btn_host">Hébergeur</string>
+    <string name="error_message">Chargement...</string>
 </resources>

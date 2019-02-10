@@ -12,8 +12,6 @@ import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.homescreen.MainActivity;
-import com.team.dream.sleepsafe.newsinister.NewSinisterActivity;
-import com.team.dream.sleepsafe.newsinister.NewSinisterActivityPresenter;
 
 public class NotificationsService extends FirebaseMessagingService implements INotificationsService {
 
