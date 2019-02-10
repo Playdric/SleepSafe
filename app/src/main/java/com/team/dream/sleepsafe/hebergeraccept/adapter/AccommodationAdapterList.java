@@ -52,10 +52,10 @@ public class AccommodationAdapterList extends RecyclerView.Adapter<Accommodation
         holder.btnSeeMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("sinister.getId()", activity.getIntent().getExtras().getString("sinister"));
+                Log.d("sinister.getId()", activity.getIntent().getExtras().getString("sinister_id"));
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 DocumentReference sinister = db.collection("sinister")
-                        .document(activity.getIntent().getExtras().getString("sinister"));
+                        .document(activity.getIntent().getExtras().getString("sinister_id"));
                 sinister.update("status",1);
                 sinister.update("id_accomodation",accommodation.getAccommodationId());
                 activity.doSmth();

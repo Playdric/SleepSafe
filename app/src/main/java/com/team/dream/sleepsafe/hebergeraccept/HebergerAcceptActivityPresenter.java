@@ -37,8 +37,6 @@ public class HebergerAcceptActivityPresenter implements IHebergerAcceptActivityP
 
     @Override
     public void getData() {
-
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("sinister")
                 .whereEqualTo("status", 0)
@@ -49,6 +47,7 @@ public class HebergerAcceptActivityPresenter implements IHebergerAcceptActivityP
                         if (task.isSuccessful()) {
                             ArrayList<Sinister> sinisters = new ArrayList<>();
                             for (QueryDocumentSnapshot document : task.getResult()) {
+
                                 sinisters.add(new Sinister(document.getId(), document.getString("firstname"), document.getString("lastname"), document.getLong("phone_number").intValue(), document.getLong("nb_people").intValue(), document.getString("comment"), document.getString("localisation"), document.getString("id_phone")));
                                 Log.d("TAG ID ACCOMMODATION :", document.getId());
                             }

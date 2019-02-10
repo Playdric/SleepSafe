@@ -26,6 +26,7 @@ import com.team.dream.sleepsafe.hebergeraccept.adapter.AccommodationAdapter;
 import com.team.dream.sleepsafe.hebergeraccept.adapter.AccommodationAdapterList;
 import com.team.dream.sleepsafe.hebergeraccept.model.Accommodation;
 import com.team.dream.sleepsafe.hebergeraccept.model.Sinister;
+import com.team.dream.sleepsafe.hebergeraccomodation.HebergerAccommodationActivity;
 import com.team.dream.sleepsafe.hebergeraccomodation.IHebergerAccommodationActivity;
 import com.team.dream.sleepsafe.hebergerhome.HebergerHomeActivity;
 import com.team.dream.sleepsafe.hebergerinformation.HebergerInformationActivity;
@@ -42,12 +43,8 @@ public class HebergerAccommodationListActivity extends AppCompatActivity impleme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_heberger_accommodation_list);
-
         presenter = new HebergerAccommodationListActivityPresenter( this, this);
-        //presenter.getData();
-        presenter = new HebergerAccommodationListActivityPresenter(this, this);
-
-        initView();
+        initView((Integer) getIntent().getExtras().get("sinister_bed"));
     }
 
     @Override
@@ -67,11 +64,12 @@ public class HebergerAccommodationListActivity extends AppCompatActivity impleme
 
     public void doSmth() {
 
-    Intent i=new Intent(HebergerAccommodationListActivity.this,HebergerHomeActivity.class);
-    startActivity(i);
+        Intent i=new Intent(HebergerAccommodationListActivity.this,HebergerHomeActivity.class);
+        startActivity(i);
     }
 
-    private void initView() {
+    private void initView(final Integer sinister_bed) {
+        Log.d("aaaaaaaaaaaaaaaaaaaab", sinister_bed.toString());
 
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("accomodation")
@@ -82,7 +80,8 @@ public class HebergerAccommodationListActivity extends AppCompatActivity impleme
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                accommodations.add(new Accommodation(document.getId(), document.getString("address_name"),document.getString("address_city"), Integer.parseInt(document.getString("address_zipcode")), Integer.parseInt(document.getString("nb_bed"))));
+                                if(Integer.parseInt(document.getString("nb_bed")) >= sinister_bed)
+                                    accommodations.add(new Accommodation(document.getId(), document.getString("address_name"),document.getString("address_city"), Integer.parseInt(document.getString("address_zipcode")), Integer.parseInt(document.getString("nb_bed"))));
                                 Log.d("TAG ID ACCOMMODATION :", document.getId());
                             }
                             fillData(accommodations);

@@ -74,7 +74,8 @@ public class HebergerAcceptActivity extends AppCompatActivity  implements IHeber
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Intent i = new Intent(HebergerAcceptActivity.this,HebergerAccommodationListActivity.class);
-                        i.putExtra("sinister", sinister.getId());
+                        i.putExtra("sinister_id", sinister.getId());
+                        i.putExtra("sinister_bed", sinister.getNbPeople());
                         startActivity(i);
                     }
                 })

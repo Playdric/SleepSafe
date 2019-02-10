@@ -29,7 +29,7 @@ public class HebergerAccommodationActivityPresenter {
         DocumentReference result = db.collection("accomodation")
                 .document(accommodationId);
         result.update("address_name",address);
-        result.update("address_zipcode  ",zipcode);
+        result.update("address_zipcode",zipcode);
         result.update("address_city",city);
         result.update("nb_bed",nbPlaces);
     }
