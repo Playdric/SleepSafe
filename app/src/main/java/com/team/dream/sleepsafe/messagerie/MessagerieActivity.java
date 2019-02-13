@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -71,9 +72,14 @@ public class MessagerieActivity extends AppCompatActivity {
                 Log.d(TAG, msg.toString());
 
                 Intent chatActivity = new Intent(MessagerieActivity.this, ChatApplicationActivity.class);
-                chatActivity.putExtra("id", msg.getId());
+                String idChat = msg.getId();
 
-                startActivity(chatActivity);
+                if (idChat == null) {
+                    Toast.makeText(MessagerieActivity.this, "ERROR: Impossible de charger le chat", Toast.LENGTH_LONG).show();
+                } else {
+                    chatActivity.putExtra("id", idChat);
+                    startActivity(chatActivity);
+                }
             }
         });
     }
