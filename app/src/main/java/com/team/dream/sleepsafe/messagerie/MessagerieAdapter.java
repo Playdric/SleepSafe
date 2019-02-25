@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.team.dream.sleepsafe.R;
-import com.team.dream.sleepsafe.chatApplication.Chat;
-import com.team.dream.sleepsafe.chatApplication.TimestampToDate;
+import com.team.dream.sleepsafe.chat.chatApplication.TimestampToDate;
 
 import java.util.List;
 
@@ -61,7 +60,7 @@ public class MessagerieAdapter extends RecyclerView.Adapter<MessagerieAdapter.My
         try {
             holder.pseudo.setText(messagerie.getPartner().getPseudo());
             holder.message.setText(messagerie.getLastContent());
-            holder.date.setText(new TimestampToDate().getDate(Long.toString(messagerie.getLastTimestamp().getSeconds()*1000, 10)));
+            holder.date.setText(new TimestampToDate().getDate(messagerie.getLastTimestamp()));
         } catch (Exception e) {
             Log.e(TAG, e.getMessage());
         }

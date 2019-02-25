@@ -1,4 +1,4 @@
-package com.team.dream.sleepsafe.chatApplication;
+package com.team.dream.sleepsafe.chat.chatApplication.entity;
 
 public class Users {
     private String id;
@@ -6,6 +6,11 @@ public class Users {
     private String email;
 
     public Users() { }
+
+    public Users(String id, String pseudo) {
+        this.id = id;
+        this.pseudo = pseudo;
+    }
 
     public Users(String id, String pseudo, String email) {
         this.id = id;

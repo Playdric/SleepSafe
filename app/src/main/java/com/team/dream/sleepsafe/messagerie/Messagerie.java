@@ -1,8 +1,10 @@
 package com.team.dream.sleepsafe.messagerie;
 
+import android.util.Log;
+
 import com.google.firebase.Timestamp;
-import com.team.dream.sleepsafe.chatApplication.Messages;
-import com.team.dream.sleepsafe.chatApplication.Users;
+import com.team.dream.sleepsafe.chat.chatApplication.entity.Messages;
+import com.team.dream.sleepsafe.chat.chatApplication.entity.Users;
 
 import java.util.List;
 
@@ -70,11 +72,13 @@ public class Messagerie {
 
     // Custom GETTER & SETTTER
     public String getLastContent(){
+        Log.d("Messagerie_Custom", Integer.toString(this.messages.size()));
+        Log.d("Messagerie_Custom", this.messages.get(this.messages.size() - 1).getContent());
         return this.messages.get(this.messages.size() - 1).getContent();
     }
 
-    public Timestamp getLastTimestamp(){
-        return this.messages.get(this.messages.size() - 1).getTimestamp();
+    public Integer getLastTimestamp(){
+        return this.messages.get(this.messages.size() - 1).getTimestamp().getSeconds();
     }
 }
 

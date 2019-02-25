@@ -62,7 +62,7 @@
             android:resource="@color/accent" />
         <activity android:name=".newsinister.NewSinisterActivity" />
         <activity android:name=".messagerie.MessagerieActivity" />
-        <activity android:name=".chatApplication.ChatApplicationActivity" />
+        <activity android:name=".chat.chatApplication.ChatApplicationActivity" />
     </application>
 
 </manifest>

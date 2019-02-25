@@ -1,4 +1,4 @@
-package com.team.dream.sleepsafe.chatApplication;
+package com.team.dream.sleepsafe.chat.chatApplication.entity;
 
 import android.util.Log;
 

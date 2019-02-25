@@ -2,7 +2,6 @@ package com.team.dream.sleepsafe.messagerie;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,23 +10,23 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.team.dream.sleepsafe.R;
-import com.team.dream.sleepsafe.chatApplication.Channel;
-import com.team.dream.sleepsafe.chatApplication.Chat;
-import com.team.dream.sleepsafe.chatApplication.ChatApplicationActivity;
-import com.team.dream.sleepsafe.chatApplication.Users;
+import com.team.dream.sleepsafe.chat.chatApplication.ChatApplicationActivity;
+import com.team.dream.sleepsafe.chat.chatApplication.entity.Users;
 import com.team.dream.sleepsafe.homescreen.MainActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Nullable;
 
 public class MessagerieActivity extends AppCompatActivity {
 
@@ -67,9 +66,7 @@ public class MessagerieActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int pos = mRecyclerView.indexOfChild(v);
-                Log.d(TAG, "POSITION : " + pos);
                 Messagerie msg = ((MessagerieAdapter) mAdapter).getItem(pos);
-                Log.d(TAG, msg.toString());
 
                 Intent chatActivity = new Intent(MessagerieActivity.this, ChatApplicationActivity.class);
                 String idChat = msg.getId();
@@ -87,18 +84,18 @@ public class MessagerieActivity extends AppCompatActivity {
     private void getAllMessages(){
         db.collection("chat")
             .whereArrayContains("userId", user1.getId())
-            .get()
-            .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            .addSnapshotListener(new EventListener<QuerySnapshot>() {
                 @Override
-                public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                    if (queryDocumentSnapshots.isEmpty()) {
-                        errorMessage.setText("Vous n'avez aucun message privé");
+                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
+                    if (e != null) {
+                        Log.w(TAG, "Listen failed.", e);
                         return;
                     }
 
                     errorMessage.setText("");
+                    messagerieList.clear();
 
-                    for (QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots) {
+                    for (QueryDocumentSnapshot queryDocumentSnapshot : value) {
                         Map<String, Object> data = queryDocumentSnapshot.getData();
 
                         Log.d(TAG, data.toString());
@@ -106,12 +103,6 @@ public class MessagerieActivity extends AppCompatActivity {
                     }
 
                     initMessageList(messagerieList);
-                }
-            })
-            .addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.w(TAG, "Error writing document", e);
                 }
             });
     }

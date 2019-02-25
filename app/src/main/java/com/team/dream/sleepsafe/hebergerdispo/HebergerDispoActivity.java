@@ -7,17 +7,13 @@ import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.androidnetworking.error.ANError;
-import com.team.dream.sleepsafe.MyFireBaseMessagingService;
 import com.team.dream.sleepsafe.R;
-import com.team.dream.sleepsafe.chatApplication.ChatApplicationActivity;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 public class HebergerDispoActivity extends AppCompatActivity implements IHebergerDispoActivity {
