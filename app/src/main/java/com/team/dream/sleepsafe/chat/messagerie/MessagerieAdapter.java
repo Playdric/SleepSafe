@@ -1,4 +1,4 @@
-package com.team.dream.sleepsafe.messagerie;
+package com.team.dream.sleepsafe.chat.messagerie;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.chat.chatApplication.TimestampToDate;
+import com.team.dream.sleepsafe.chat.chatApplication.entity.Messagerie;
 
 import java.util.List;
 

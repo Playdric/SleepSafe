@@ -1,10 +1,6 @@
-package com.team.dream.sleepsafe.messagerie;
+package com.team.dream.sleepsafe.chat.chatApplication.entity;
 
 import android.util.Log;
-
-import com.google.firebase.Timestamp;
-import com.team.dream.sleepsafe.chat.chatApplication.entity.Messages;
-import com.team.dream.sleepsafe.chat.chatApplication.entity.Users;
 
 import java.util.List;
 
@@ -15,6 +11,7 @@ public class Messagerie {
     private List<Object> isView;
     private List<Object> isTyping;
     private Users partner;
+    private Users currentUser;
 
     public Messagerie() { }
 
@@ -68,6 +65,14 @@ public class Messagerie {
 
     public void setPartner(Users partner) {
         this.partner = partner;
+    }
+
+    public Users getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(Users currentUser) {
+        this.currentUser = currentUser;
     }
 
     // Custom GETTER & SETTTER

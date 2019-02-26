@@ -10,7 +10,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.herbergerconnection.HebergerConnectionActivity;
-import com.team.dream.sleepsafe.messagerie.MessagerieActivity;
+import com.team.dream.sleepsafe.chat.messagerie.MessagerieActivity;
 import com.team.dream.sleepsafe.newsinister.NewSinisterActivity;
 
 

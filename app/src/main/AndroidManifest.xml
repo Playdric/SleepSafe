@@ -41,6 +41,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity android:name=".chat.messagerie.MessagerieActivity" />
+        <activity android:name=".chat.chatApplication.ChatApplicationActivity" />
+        <activity android:name=".chat.contactList.ContactListActivity" />
 
 
 
@@ -61,8 +64,6 @@
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/accent" />
         <activity android:name=".newsinister.NewSinisterActivity" />
-        <activity android:name=".messagerie.MessagerieActivity" />
-        <activity android:name=".chat.chatApplication.ChatApplicationActivity" />
     </application>
 
 </manifest>

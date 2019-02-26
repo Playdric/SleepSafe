@@ -7,4 +7,5 @@
     <string name="btn_stricken">Sinistré</string>
     <string name="btn_host">Hébergeur</string>
     <string name="error_message">Chargement...</string>
+    <string name="btn_chat">Envoyer un message</string>
 </resources>

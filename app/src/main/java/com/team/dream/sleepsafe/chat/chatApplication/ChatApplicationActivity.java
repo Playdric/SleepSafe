@@ -1,20 +1,22 @@
 package com.team.dream.sleepsafe.chat.chatApplication;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -22,14 +24,18 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.SetOptions;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.chat.chatApplication.entity.Messages;
 import com.team.dream.sleepsafe.chat.chatApplication.entity.Users;
-import com.team.dream.sleepsafe.messagerie.Messagerie;
+import com.team.dream.sleepsafe.chat.chatApplication.entity.Messagerie;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 public class ChatApplicationActivity extends AppCompatActivity {
 
@@ -57,40 +63,18 @@ public class ChatApplicationActivity extends AppCompatActivity {
 
         Bundle myIntent = getIntent().getExtras(); // gets the previously created intent
 
+        if (myIntent == null) {
+            return;
+        }
 
-        if (myIntent != null) {
-            String id = myIntent.getString("id");
-            if (id != null) {
+        String id = myIntent.getString("id");
+        if (id != null) {
+            if (myIntent.getString("newConversation") != null) {
+                Users partners = new Users(id, myIntent.getString("pseudo"), myIntent.getString("email"));
+                createNewMessagerie(partners);
+            } else {
                 messagerie.setId(id);
-                db.collection("chat").document(id)
-                    .get()
-                    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                        @Override
-                        public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            if (documentSnapshot.exists()) {
-                                refreshMessages(documentSnapshot);
-                            }
-                        }
-                    });
-
-                final DocumentReference docRef = db.collection("chat").document(messagerie.getId());
-                docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable DocumentSnapshot snapshot,
-                                        @Nullable FirebaseFirestoreException e) {
-                        if (e != null) {
-                            Log.w(TAG, "Listen failed.", e);
-                            return;
-                        }
-
-                        if (snapshot != null && snapshot.exists()) {
-                            Log.d(TAG, "Current data: " + snapshot.getData());
-                            refreshMessages(snapshot);
-                        } else {
-                            Log.d(TAG, "Current data: null");
-                        }
-                    }
-                });
+                getChat();
             }
         }
     }
@@ -123,10 +107,32 @@ public class ChatApplicationActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
     }
 
+    private void getChat() {
+        final DocumentReference docRef = db.collection("chat").document(messagerie.getId());
+        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirebaseFirestoreException e) {
+                if (e != null) {
+                    Log.w(TAG, "Listen failed.", e);
+                    return;
+                }
+
+                if (snapshot != null && snapshot.exists()) {
+                    Log.d(TAG, "Current data: " + snapshot.getData());
+                    refreshMessages(snapshot);
+                } else {
+                    Log.d(TAG, "Current data: null");
+                }
+            }
+        });
+    }
+
     private void createNewMessage() {
+        String pseudo = getPseudo();
         String content = inputMsg.getText().toString();
-        Users from = new Users(mAuth.getUid(), mAuth.getCurrentUser().getEmail());
-        Users to = new Users(messagerie.getPartner().getId(), messagerie.getPartner().getPseudo());
+        Users from = new Users(mAuth.getUid(), pseudo, mAuth.getCurrentUser().getEmail());
+        Users to = messagerie.getPartner();
 
         Messages message = new Messages(from, to, content);
 
@@ -136,13 +142,19 @@ public class ChatApplicationActivity extends AppCompatActivity {
 
         data.put("messages", messagerie.getMessages());
 
+        setNewMessageToBdd(message);
+    }
+
+    private void setNewMessageToBdd(final Messages newMessage) {
         db.collection("chat").document(messagerie.getId())
-                .set(data, SetOptions.merge())
+                .set(messagerie, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "DocumentSnapshot successfully written!");
-                        inputMsg.setText("");
+                    Log.d(TAG, "DocumentSnapshot successfully written!");
+                    inputMsg.setText("");
+
+                    getChat();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -158,5 +170,29 @@ public class ChatApplicationActivity extends AppCompatActivity {
         messagerie = data.toObject(Messagerie.class);
         List<Messages> messages = messagerie.getMessages();
         initMessageList(messages);
+    }
+
+    private String getPseudo() {
+        if (mAuth.getCurrentUser().getEmail().equals("ruben.desert@gmail.com")) {
+            return "Ruben";
+        } else if (mAuth.getCurrentUser().getEmail().equals("dlaamy7@gmail.com")) {
+            return "Max";
+        } else if (mAuth.getCurrentUser().getEmail().equals("paul.finet@gmail.com")) {
+            return "Paul";
+        } else if (mAuth.getCurrentUser().getEmail().equals("dogui78930@gmail.com")) {
+            return "Dorian";
+        } else {
+            return "Anonymous";
+        }
+    }
+
+    private void createNewMessagerie(Users partner) {
+        String pseudo = getPseudo();
+        messagerie.setCurrentUser(new Users(mAuth.getUid(), pseudo, mAuth.getCurrentUser().getEmail()));
+        messagerie.setId(UUID.randomUUID().toString());
+        messagerie.setPartner(partner);
+        List<Messages> messages = new ArrayList<>();
+        messagerie.setMessages(messages);
+        messagerie.setUserId(Arrays.asList(mAuth.getUid(), partner.getId()));
     }
 }

@@ -1,4 +1,4 @@
-package com.team.dream.sleepsafe.messagerie;
+package com.team.dream.sleepsafe.chat.messagerie;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +20,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.chat.chatApplication.ChatApplicationActivity;
+import com.team.dream.sleepsafe.chat.chatApplication.entity.Messagerie;
 import com.team.dream.sleepsafe.chat.chatApplication.entity.Users;
+import com.team.dream.sleepsafe.chat.contactList.ContactListActivity;
 import com.team.dream.sleepsafe.homescreen.MainActivity;
 
 import java.util.ArrayList;
@@ -34,6 +37,7 @@ public class MessagerieActivity extends AppCompatActivity {
     private Users user1;
     private FirebaseFirestore db;
     TextView errorMessage;
+    Button contactListBtn;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -48,9 +52,12 @@ public class MessagerieActivity extends AppCompatActivity {
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             user1 = new Users(user.getUid(), user.getDisplayName(), user.getEmail());
-            getAllMessages();
+
             initView();
             initListener();
+
+            errorMessage.setText("Chargement...");
+            getAllMessages();
         } else {
             startActivity(new Intent(MessagerieActivity.this, MainActivity.class));
         }
@@ -58,6 +65,7 @@ public class MessagerieActivity extends AppCompatActivity {
 
     private void initView(){
         errorMessage = findViewById(R.id.error_message);
+        contactListBtn = findViewById(R.id.newMsg);
         mRecyclerView = (RecyclerView) findViewById(R.id.chat);
     }
 
@@ -79,6 +87,13 @@ public class MessagerieActivity extends AppCompatActivity {
                 }
             }
         });
+
+        contactListBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MessagerieActivity.this, ContactListActivity.class));
+            }
+        });
     }
 
     private void getAllMessages(){
@@ -86,7 +101,7 @@ public class MessagerieActivity extends AppCompatActivity {
             .whereArrayContains("userId", user1.getId())
             .addSnapshotListener(new EventListener<QuerySnapshot>() {
                 @Override
-                public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException e) {
+                public void onEvent(@Nullable QuerySnapshot snapshot, @Nullable FirebaseFirestoreException e) {
                     if (e != null) {
                         Log.w(TAG, "Listen failed.", e);
                         return;
@@ -95,11 +110,16 @@ public class MessagerieActivity extends AppCompatActivity {
                     errorMessage.setText("");
                     messagerieList.clear();
 
-                    for (QueryDocumentSnapshot queryDocumentSnapshot : value) {
+                    for (QueryDocumentSnapshot queryDocumentSnapshot : snapshot) {
                         Map<String, Object> data = queryDocumentSnapshot.getData();
 
                         Log.d(TAG, data.toString());
                         messagerieList.add(queryDocumentSnapshot.toObject(Messagerie.class));
+                    }
+
+                    if (messagerieList.isEmpty()) {
+                        errorMessage.setText("Vous n'avez pas encore de message");
+                        return;
                     }
 
                     initMessageList(messagerieList);
