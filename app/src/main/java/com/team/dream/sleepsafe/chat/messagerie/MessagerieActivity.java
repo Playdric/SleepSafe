@@ -20,8 +20,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.chat.chatApplication.ChatApplicationActivity;
-import com.team.dream.sleepsafe.chat.chatApplication.entity.Messagerie;
-import com.team.dream.sleepsafe.chat.chatApplication.entity.Users;
+import com.team.dream.sleepsafe.chat.entity.Messagerie;
+import com.team.dream.sleepsafe.chat.entity.Users;
 import com.team.dream.sleepsafe.chat.contactList.ContactListActivity;
 import com.team.dream.sleepsafe.homescreen.MainActivity;
 

@@ -1,8 +1,6 @@
-package com.team.dream.sleepsafe.chat.chatApplication.entity;
+package com.team.dream.sleepsafe.chat.entity;
 
 import com.google.firebase.Timestamp;
-
-import java.sql.Time;
 
 public class Messages {
     private Users from;

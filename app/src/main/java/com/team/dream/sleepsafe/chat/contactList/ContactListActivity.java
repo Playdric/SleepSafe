@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.chat.chatApplication.ChatApplicationActivity;
-import com.team.dream.sleepsafe.chat.chatApplication.entity.Users;
+import com.team.dream.sleepsafe.chat.entity.Users;
 
 import java.util.ArrayList;
 import java.util.List;

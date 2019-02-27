@@ -1,4 +1,4 @@
-package com.team.dream.sleepsafe.chat.chatApplication.entity;
+package com.team.dream.sleepsafe.chat.entity;
 
 import java.util.HashMap;
 import java.util.List;

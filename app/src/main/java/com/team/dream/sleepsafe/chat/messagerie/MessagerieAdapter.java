@@ -1,16 +1,19 @@
 package com.team.dream.sleepsafe.chat.messagerie;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.team.dream.sleepsafe.R;
 import com.team.dream.sleepsafe.chat.chatApplication.TimestampToDate;
-import com.team.dream.sleepsafe.chat.chatApplication.entity.Messagerie;
+import com.team.dream.sleepsafe.chat.entity.Messagerie;
 
 import java.util.List;
 
@@ -25,12 +28,14 @@ public class MessagerieAdapter extends RecyclerView.Adapter<MessagerieAdapter.My
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView pseudo, message, date;
+        public ImageView image;
 
         public MyViewHolder(View view) {
             super(view);
             pseudo = (TextView) view.findViewById(R.id.pseudo);
             message = (TextView) view.findViewById(R.id.message);
             date = (TextView) view.findViewById(R.id.date);
+            image = (ImageView) view.findViewById(R.id.avatar);
         }
     }
 
@@ -41,7 +46,7 @@ public class MessagerieAdapter extends RecyclerView.Adapter<MessagerieAdapter.My
     @Override
     public MessagerieAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.chat_list_row, parent, false);
+                .inflate(R.layout.chat_list_row_messagerie, parent, false);
 
         MessagerieAdapter.MyViewHolder holder = new MyViewHolder(itemView);
 

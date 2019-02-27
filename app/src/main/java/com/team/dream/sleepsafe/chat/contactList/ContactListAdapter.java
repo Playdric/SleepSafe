@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.team.dream.sleepsafe.R;
-import com.team.dream.sleepsafe.chat.chatApplication.entity.Users;
+import com.team.dream.sleepsafe.chat.entity.Users;
 
 import java.util.List;
 

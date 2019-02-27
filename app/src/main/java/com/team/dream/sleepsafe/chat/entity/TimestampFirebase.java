@@ -1,4 +1,4 @@
-package com.team.dream.sleepsafe.chat.chatApplication.entity;
+package com.team.dream.sleepsafe.chat.entity;
 
 public class TimestampFirebase {
     private Integer nanoseconds;
